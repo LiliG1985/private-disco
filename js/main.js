@@ -40,8 +40,12 @@
   /* ---------- footer ---------- */
   const footer = document.getElementById("site-footer");
   if (footer) {
+    const footImg = footer.dataset.img || "assets/photos/mirrorballs.jpg";
     footer.outerHTML =
-      '<footer><div class="wrap"><div class="foot">' +
+      '<footer><div class="foot-bg" style="background-image:url(' + footImg + ')"></div><div class="wrap">' +
+      '<div class="foot-cta"><p class="eyebrow">Let\'s connect</p><h2>Let\'s bring your vision <span class="metal">to life.</span></h2>' +
+      '<a class="btn btn-metal" href="' + waLink("Hi Private Disco, I'd like to enquire about an event.") + '" target="_blank" rel="noopener">' + ICONS.wa + 'Start the conversation</a></div>' +
+      '<div class="foot">' +
       '<div><img src="assets/logo.png" alt="Private Disco" width="279" height="292"><p>Talent-first event and entertainment experiences across the UAE.</p></div>' +
       '<div><h4>Explore</h4><ul>' + links.map(([h, t]) => '<li><a href="' + h + '">' + t + "</a></li>").join("") + "</ul></div>" +
       '<div><h4>Get in touch</h4><ul>' +
@@ -83,6 +87,54 @@
     es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
   }, { threshold: 0.12 }) : null;
   document.querySelectorAll(".reveal").forEach((el) => (io ? io.observe(el) : el.classList.add("in")));
+
+  /* ---------- a little life: progress bar, sparkles, parallax, cursor glow ---------- */
+  const still = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const bar = document.createElement("div"); bar.className = "progress"; document.body.appendChild(bar);
+  const parallax = [...document.querySelectorAll(".banner-bg, .foot-bg")];
+  const tick = () => {
+    const h = document.documentElement.scrollHeight - innerHeight;
+    bar.style.transform = "scaleX(" + (h > 0 ? scrollY / h : 0) + ")";
+    if (!still) parallax.forEach((el) => {
+      const r = el.parentElement.getBoundingClientRect();
+      if (r.bottom > 0 && r.top < innerHeight) el.style.transform = "translate3d(0," + ((r.top + r.height / 2 - innerHeight / 2) * -0.12).toFixed(1) + "px,0) scale(1.15)";
+    });
+  };
+  tick();
+  window.addEventListener("scroll", () => requestAnimationFrame(tick), { passive: true });
+  window.addEventListener("resize", tick);
+
+  // twinkling sparkles in any [data-sparkle] area
+  if (!still) document.querySelectorAll("[data-sparkle]").forEach((host) => {
+    const n = +host.dataset.sparkle || 24;
+    const layer = document.createElement("div"); layer.className = "sparkles"; layer.setAttribute("aria-hidden", "true");
+    for (let i = 0; i < n; i++) {
+      const s = document.createElement("i");
+      const size = (Math.random() * 3 + 1.5).toFixed(1);
+      s.style.cssText = "left:" + (Math.random() * 100).toFixed(1) + "%;top:" + (Math.random() * 100).toFixed(1) + "%;width:" + size + "px;height:" + size + "px;animation-delay:" + (Math.random() * 6).toFixed(2) + "s;animation-duration:" + (3 + Math.random() * 4).toFixed(2) + "s";
+      if (Math.random() < 0.18) s.className = "star";
+      layer.appendChild(s);
+    }
+    host.prepend(layer);
+  });
+
+  // soft glow that follows the cursor (desktop only)
+  if (!still && matchMedia("(hover: hover) and (pointer: fine)").matches) {
+    const glow = document.createElement("div"); glow.className = "cursor-glow"; document.body.appendChild(glow);
+    let gx = innerWidth / 2, gy = innerHeight / 2, tx = gx, ty = gy;
+    addEventListener("pointermove", (e) => { tx = e.clientX; ty = e.clientY; glow.style.opacity = 1; }, { passive: true });
+    (function loop() { gx += (tx - gx) * 0.12; gy += (ty - gy) * 0.12; glow.style.transform = "translate(" + (gx - 300) + "px," + (gy - 300) + "px)"; requestAnimationFrame(loop); })();
+  }
+
+  // cards tilt slightly toward the pointer
+  if (!still && matchMedia("(hover: hover)").matches) document.querySelectorAll(".service, .artist, .c-card, .card").forEach((el) => {
+    el.addEventListener("pointermove", (e) => {
+      const r = el.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - 0.5, y = (e.clientY - r.top) / r.height - 0.5;
+      el.style.transform = "perspective(900px) rotateY(" + (x * 5).toFixed(2) + "deg) rotateX(" + (-y * 5).toFixed(2) + "deg) translateY(-4px)";
+      el.style.setProperty("--mx", ((x + 0.5) * 100).toFixed(1) + "%"); el.style.setProperty("--my", ((y + 0.5) * 100).toFixed(1) + "%");
+    });
+    el.addEventListener("pointerleave", () => { el.style.transform = ""; });
+  });
 
   /* ---------- form sending ----------
      With a Web3Forms key: emails the entry to you.
