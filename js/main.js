@@ -40,7 +40,7 @@
   /* ---------- footer ---------- */
   const footer = document.getElementById("site-footer");
   if (footer) {
-    const footImg = footer.dataset.img || "assets/photos/mirrorballs.jpg";
+    const footImg = "assets/banners/ball-glass.jpg";
     footer.outerHTML =
       '<footer><div class="foot-bg" style="background-image:url(' + footImg + ')"></div><div class="wrap">' +
       '<div class="foot-cta"><p class="eyebrow">Let\'s connect</p><h2>Let\'s bring your vision <span class="metal">to life.</span></h2>' +
