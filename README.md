@@ -40,11 +40,11 @@ Until a key is added, both forms still work: they open WhatsApp with the entry t
 
 ## Editing tips
 - Colours live at the top of `css/style.css` (taken from the Feb 2023 brand guidelines).
-- Headings use Fraunces Italic as a free stand-in for Restora Bold Italic. If you have a Restora web-font licence, add the font files to `assets/` and an `@font-face` rule; it's already first in the `--head` font list.
-- Body text uses Geneva (as in the guidelines) with Mulish as the fallback on devices without Geneva.
+- Headings use Cormorant Garamond (a free stand-in for Restora); body text uses Jost.
 - Photos live in `assets/` (talent, events, services, design, photos). Swap any file for a new one with the same name to update it.
 - The logo in `assets/logo.png` was cut from the brand guidelines PDF. If you have the original vector/PNG from your designer, drop it in with the same name.
 
 ## Seeing old versions after an upload?
 Browsers keep a saved copy for a few minutes. Press Cmd+Shift+R (Mac) / Ctrl+Shift+R (Windows) to hard-refresh.
 Whenever you edit `css/style.css` or a file in `js/`, bump the `?v=` number on its link in each HTML page so visitors get the new file straight away.
+- Photos use a "vintage film" grade: soft faded colour, plum shadows, warm highlights, light grain. New photos should be graded the same way to match.

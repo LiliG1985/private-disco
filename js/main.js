@@ -89,53 +89,22 @@
   }, { threshold: 0.12 }) : null;
   document.querySelectorAll(".reveal").forEach((el) => (io ? io.observe(el) : el.classList.add("in")));
 
-  /* ---------- a little life: progress bar, sparkles, parallax, cursor glow ---------- */
+  /* ---------- subtle motion: slow parallax on header & footer imagery only ---------- */
   const still = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const bar = document.createElement("div"); bar.className = "progress"; document.body.appendChild(bar);
   const parallax = [...document.querySelectorAll(".banner-bg, .foot-bg")];
   const tick = () => {
-    const h = document.documentElement.scrollHeight - innerHeight;
-    bar.style.transform = "scaleX(" + (h > 0 ? scrollY / h : 0) + ")";
-    if (!still) parallax.forEach((el) => {
+    if (still) return;
+    parallax.forEach((el) => {
       const r = el.parentElement.getBoundingClientRect();
-      if (r.bottom > 0 && r.top < innerHeight) { const f = el.classList.contains("banner-bg") ? 0.08 : 0.12; el.style.transform = "translate3d(0," + Math.max(-55, Math.min(55, (r.top + r.height / 2 - innerHeight / 2) * -f)).toFixed(1) + "px,0)" + (el.classList.contains("foot-bg") ? " scale(1.15)" : ""); }
+      if (r.bottom > 0 && r.top < innerHeight) {
+        const f = el.classList.contains("banner-bg") ? 0.06 : 0.1;
+        el.style.transform = "translate3d(0," + Math.max(-45, Math.min(45, (r.top + r.height / 2 - innerHeight / 2) * -f)).toFixed(1) + "px,0)" + (el.classList.contains("foot-bg") ? " scale(1.12)" : "");
+      }
     });
   };
   tick();
   window.addEventListener("scroll", () => requestAnimationFrame(tick), { passive: true });
   window.addEventListener("resize", tick);
-
-  // twinkling sparkles in any [data-sparkle] area
-  if (!still) document.querySelectorAll("[data-sparkle]").forEach((host) => {
-    const n = +host.dataset.sparkle || 24;
-    const layer = document.createElement("div"); layer.className = "sparkles"; layer.setAttribute("aria-hidden", "true");
-    for (let i = 0; i < n; i++) {
-      const s = document.createElement("i");
-      const size = (Math.random() * 3 + 1.5).toFixed(1);
-      s.style.cssText = "left:" + (Math.random() * 100).toFixed(1) + "%;top:" + (Math.random() * 100).toFixed(1) + "%;width:" + size + "px;height:" + size + "px;animation-delay:" + (Math.random() * 6).toFixed(2) + "s;animation-duration:" + (3 + Math.random() * 4).toFixed(2) + "s";
-      if (Math.random() < 0.18) s.className = "star";
-      layer.appendChild(s);
-    }
-    host.prepend(layer);
-  });
-
-  // soft glow that follows the cursor (desktop only)
-  if (!still && matchMedia("(hover: hover) and (pointer: fine)").matches) {
-    const glow = document.createElement("div"); glow.className = "cursor-glow"; document.body.appendChild(glow);
-    let gx = innerWidth / 2, gy = innerHeight / 2, tx = gx, ty = gy;
-    addEventListener("pointermove", (e) => { tx = e.clientX; ty = e.clientY; glow.style.opacity = 1; }, { passive: true });
-    (function loop() { gx += (tx - gx) * 0.12; gy += (ty - gy) * 0.12; glow.style.transform = "translate(" + (gx - 300) + "px," + (gy - 300) + "px)"; requestAnimationFrame(loop); })();
-  }
-
-  // cards tilt slightly toward the pointer
-  if (!still && matchMedia("(hover: hover)").matches) document.querySelectorAll(".service, .artist, .c-card, .card").forEach((el) => {
-    el.addEventListener("pointermove", (e) => {
-      const r = el.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - 0.5, y = (e.clientY - r.top) / r.height - 0.5;
-      el.style.transform = "perspective(900px) rotateY(" + (x * 5).toFixed(2) + "deg) rotateX(" + (-y * 5).toFixed(2) + "deg) translateY(-4px)";
-      el.style.setProperty("--mx", ((x + 0.5) * 100).toFixed(1) + "%"); el.style.setProperty("--my", ((y + 0.5) * 100).toFixed(1) + "%");
-    });
-    el.addEventListener("pointerleave", () => { el.style.transform = ""; });
-  });
 
   /* ---------- form sending ----------
      With a Web3Forms key: emails the entry to you.
