@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Competition — Win a Private Disco</title>
+<meta name="description" content="Enter the Private Disco competition: choose your date, tell us your celebration and why you should win.">
+<meta name="theme-color" content="#0A000A">
+<link rel="icon" href="assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@1,9..144,500..700,50&family=Mulish:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="competition">
+<div id="site-header"></div>
+
+<main>
+  <header class="page-hero wrap">
+    <p class="eyebrow">The Private Disco Competition</p>
+    <h1>Win a <span class="metal">Private Disco</span></h1>
+    <p>Choose your date, tell us what you're celebrating and why it deserves a Private Disco. Our favourite story wins the night.</p>
+    <div class="prize wrap" style="padding:0;text-align:left">
+      <div><h3>The DJ</h3><p>A Private Disco DJ set for your celebration.</p></div>
+      <div><h3>The Sound &amp; Light</h3><p>Our AV team, set up and run on the night.</p></div>
+      <div><h3>The Décor</h3><p>A disco styling touch from our décor division.</p></div>
+    </div>
+  </header>
+
+  <section class="wrap" style="padding-top:20px">
+    <form id="comp-form" novalidate>
+      <div class="comp-layout">
+        <!-- Calendar -->
+        <div class="calendar" id="calendar" aria-label="Choose your event date">
+          <p class="eyebrow" style="margin-bottom:10px">Step 1 · Your date</p>
+          <div class="cal-head">
+            <span class="cal-title" id="cal-title">Month</span>
+            <div class="cal-nav">
+              <button type="button" id="cal-prev" aria-label="Previous month">‹</button>
+              <button type="button" id="cal-next" aria-label="Next month">›</button>
+            </div>
+          </div>
+          <div class="cal-grid" id="cal-grid"></div>
+          <div class="cal-picked">
+            <span class="label">Requested date</span>
+            <strong id="cal-picked" class="none">Tap a date</strong>
+          </div>
+          <div class="field" style="margin-top:18px">
+            <label for="time">Start time <span class="req">*</span></label>
+            <input id="time" name="time" type="time" required>
+          </div>
+          <p class="cal-hint" style="margin-top:12px">Weekend dates are highlighted in brass.</p>
+        </div>
+
+        <!-- Details -->
+        <div class="form-card">
+          <p class="eyebrow" style="margin-bottom:22px">Step 2 · Your celebration</p>
+          <div class="form-grid">
+            <div class="field">
+              <label for="celebration">Celebration <span class="req">*</span></label>
+              <select id="celebration" name="celebration" required>
+                <option value="">Choose one</option>
+                <option>Birthday</option><option>Engagement</option><option>Wedding</option><option>Anniversary</option>
+                <option>Bachelor / Bachelorette</option><option>Graduation</option><option>Corporate event</option><option>Just because</option><option>Other</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="venue">Venue <span class="req">*</span></label>
+              <select id="venue" name="venue" required>
+                <option value="">Choose one</option>
+                <option>Yacht</option><option>Villa</option><option>Hotel / venue</option><option>Other</option><option>Not decided yet</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="guests">Number of guests</label>
+              <input id="guests" name="guests" type="number" min="1" max="1000" placeholder="e.g. 40">
+            </div>
+            <div class="field">
+              <label for="location">Location / area</label>
+              <input id="location" name="location" placeholder="e.g. Dubai Marina">
+            </div>
+            <div class="field full">
+              <label for="why">Why should you win? <span class="req">*</span></label>
+              <textarea id="why" name="why" required maxlength="1500" placeholder="Tell us the story behind the celebration and why it deserves a Private Disco."></textarea>
+            </div>
+          </div>
+
+          <p class="eyebrow" style="margin:34px 0 22px">Step 3 · Your details</p>
+          <div class="form-grid">
+            <div class="field">
+              <label for="name">Full name <span class="req">*</span></label>
+              <input id="name" name="name" autocomplete="name" required>
+            </div>
+            <div class="field">
+              <label for="phone">WhatsApp / phone <span class="req">*</span></label>
+              <input id="phone" name="phone" type="tel" autocomplete="tel" placeholder="+971" required>
+            </div>
+            <div class="field">
+              <label for="email">Email <span class="req">*</span></label>
+              <input id="email" name="email" type="email" autocomplete="email" required>
+            </div>
+            <div class="field">
+              <label for="insta">Instagram handle</label>
+              <input id="insta" name="insta" placeholder="@yourname">
+            </div>
+            <div class="field full">
+              <label class="check"><input type="checkbox" id="follow" name="follow"> I follow <a data-ig style="color:var(--brass-2)" data-text="ig">@privatedisco</a> on Instagram</label>
+            </div>
+            <div class="field full">
+              <label class="check"><input type="checkbox" id="terms" name="terms" required> I agree to the competition terms below and to Private Disco contacting me about my entry. <span class="req">*</span></label>
+            </div>
+          </div>
+          <button class="btn btn-metal" type="submit" style="margin-top:28px;width:100%">Submit my entry</button>
+          <div class="form-status" id="comp-status" role="status" aria-live="polite"></div>
+        </div>
+      </div>
+    </form>
+  </section>
+
+  <section class="wrap" style="padding-top:20px">
+    <div class="form-card terms">
+      <p class="eyebrow" style="margin-bottom:14px">Competition terms</p>
+      <ul>
+        <li>One entry per person. Entrants must be 18 or over.</li>
+        <li>The requested date is a preference and is subject to availability; the winner's date will be confirmed with Private Disco.</li>
+        <li>The winner is chosen by the Private Disco team based on the entry, and will be contacted by WhatsApp or email.</li>
+        <li>The prize has no cash alternative, is non-transferable, and excludes venue hire, food and drink.</li>
+        <li>Private Disco may share the winning celebration (with permission) on Instagram.</li>
+      </ul>
+    </div>
+  </section>
+</main>
+
+<div id="site-footer"></div>
+<script src="js/config.js"></script>
+<script src="js/main.js"></script>
+<script src="js/competition.js"></script>
+</body>
+</html>

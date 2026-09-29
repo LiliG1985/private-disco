@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contact — Private Disco</title>
+<meta name="description" content="Contact Private Disco: bespoke event and entertainment specialists in the UAE. WhatsApp +971 58 966 4411 or email alexs@privatedisco.com.">
+<meta name="theme-color" content="#0A000A">
+<link rel="icon" href="assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@1,9..144,500..700,50&family=Mulish:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="contact">
+<div id="site-header"></div>
+
+<main>
+  <header class="page-hero wrap">
+    <p class="eyebrow">Contact</p>
+    <h1>Let's bring your vision <span class="metal">to life</span></h1>
+    <p>Bespoke event and entertainment specialists. WhatsApp is the fastest way to reach us: send your date, venue and guest count and we'll come back with ideas and a proposal.</p>
+  </header>
+
+  <section class="wrap" style="padding-top:10px">
+    <div class="person reveal">
+      <div class="ph"><img src="assets/photos/phone.jpg" alt="Glitter-gloved hand on a mirrored telephone" loading="lazy"></div>
+      <div class="tx">
+        <p class="eyebrow">Let's connect</p>
+        <h2 data-text="name">Alex Simmons</h2>
+        <p class="role">Private Disco</p>
+        <ul>
+          <li><a data-wa="Hi Alex, I'd like to enquire about an event."><span data-icon="wa"></span><span data-text="wa"></span></a></li>
+          <li><a data-mail="Private Disco enquiry"><span data-icon="mail"></span><span data-text="email"></span></a></li>
+          <li><a data-ig><span data-icon="ig"></span><span data-text="ig"></span></a></li>
+        </ul>
+        <div><a class="btn btn-metal" data-wa="Hi Alex, I'd like to enquire about an event."><span data-icon="wa"></span>WhatsApp Alex</a></div>
+      </div>
+    </div>
+
+    <div class="contact-cards">
+      <a class="c-card reveal" data-wa="Hi Private Disco, I'd like to enquire about an event.">
+        <span data-icon="wa"></span><h3>WhatsApp</h3><span class="val" data-text="wa"></span><span class="go">Start a chat →</span>
+      </a>
+      <a class="c-card reveal" data-mail="Private Disco enquiry">
+        <span data-icon="mail"></span><h3>Email</h3><span class="val" data-text="email"></span><span class="go">Send an email →</span>
+      </a>
+      <a class="c-card reveal" data-ig>
+        <span data-icon="ig"></span><h3>Instagram</h3><span class="val" data-text="ig"></span><span class="go">Follow &amp; DM →</span>
+      </a>
+    </div>
+
+    <form class="form-card reveal" id="enquiry" novalidate style="max-width:860px;margin:0 auto">
+      <p class="eyebrow">Quick enquiry</p>
+      <h2 style="margin:10px 0 28px;font-size:clamp(28px,3.4vw,40px)">Tell us the details</h2>
+      <div class="form-grid">
+        <div class="field"><label for="e-name">Name <span class="req">*</span></label><input id="e-name" autocomplete="name" required></div>
+        <div class="field"><label for="e-phone">WhatsApp / phone <span class="req">*</span></label><input id="e-phone" type="tel" autocomplete="tel" placeholder="+971" required></div>
+        <div class="field"><label for="e-email">Email</label><input id="e-email" type="email" autocomplete="email"></div>
+        <div class="field"><label for="e-date">Event date</label><input id="e-date" type="date"></div>
+        <div class="field"><label for="e-venue">Venue</label>
+          <select id="e-venue"><option value="">Choose one</option><option>Yacht</option><option>Villa</option><option>Hotel / venue</option><option>Corporate / brand event</option><option>Wedding venue</option><option>Other</option></select></div>
+        <div class="field"><label for="e-guests">Guests</label><input id="e-guests" type="number" min="1" placeholder="e.g. 40"></div>
+        <div class="field full"><span class="label">Services</span>
+          <div style="display:flex;flex-wrap:wrap;gap:22px;margin-top:4px">
+            <label class="check"><input type="checkbox" name="svc" value="Private DJ"> Private DJ</label>
+            <label class="check"><input type="checkbox" name="svc" value="AV hire"> AV hire</label>
+            <label class="check"><input type="checkbox" name="svc" value="Décor"> Décor &amp; installations</label>
+            <label class="check"><input type="checkbox" name="svc" value="Live acts / tributes"> Live acts &amp; tributes</label>
+            <label class="check"><input type="checkbox" name="svc" value="360 / photo booth"> 360° / photo booth</label>
+            <label class="check"><input type="checkbox" name="svc" value="Full event planning"> Full event planning</label>
+            <label class="check"><input type="checkbox" name="svc" value="Yacht hire"> Yacht hire</label>
+          </div>
+        </div>
+        <div class="field full"><label for="e-msg">Message</label><textarea id="e-msg" placeholder="Tell us about the celebration and the vibe you want."></textarea></div>
+      </div>
+      <button class="btn btn-metal" type="submit" style="margin-top:26px">Send enquiry</button>
+      <div class="form-status" id="e-status" role="status" aria-live="polite"></div>
+    </form>
+  </section>
+</main>
+
+<div id="site-footer"></div>
+<script src="js/config.js"></script>
+<script src="js/main.js"></script>
+<script>
+(function () {
+  const f = document.getElementById("enquiry"), st = document.getElementById("e-status");
+  const show = (m, ok) => { st.textContent = m; st.className = "form-status show " + (ok ? "ok" : "err"); };
+  const v = (id) => document.getElementById(id).value.trim();
+  f.addEventListener("input", (e) => e.target.classList.remove("invalid"));
+  f.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const req = ["e-name", "e-phone"].map((id) => document.getElementById(id));
+    req.forEach((el) => el.classList.toggle("invalid", !el.value.trim()));
+    const bad = req.find((el) => !el.value.trim());
+    if (bad) { show("Please add your name and phone number.", false); bad.focus(); return; }
+    const fields = {
+      Name: v("e-name"), "Phone / WhatsApp": v("e-phone"), Email: v("e-email"), "Event date": v("e-date"),
+      Venue: v("e-venue"), Guests: v("e-guests"),
+      Services: [...f.querySelectorAll("[name=svc]:checked")].map((c) => c.value).join(", "),
+      Message: v("e-msg")
+    };
+    const btn = f.querySelector("button"); btn.disabled = true; btn.textContent = "Sending…";
+    try {
+      const via = await window.PD.send("Website enquiry: " + fields.Name, fields);
+      if (via === "email") { show("Thank you! We'll be in touch shortly.", true); f.reset(); }
+      else show("WhatsApp has opened with your enquiry filled in — just press send.", true);
+    } catch (err) { show("Sorry, that didn't send. Please message us on WhatsApp instead.", false); }
+    finally { btn.disabled = false; btn.textContent = "Send enquiry"; }
+  });
+})();
+</script>
+</body>
+</html>
