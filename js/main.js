@@ -97,7 +97,7 @@
     bar.style.transform = "scaleX(" + (h > 0 ? scrollY / h : 0) + ")";
     if (!still) parallax.forEach((el) => {
       const r = el.parentElement.getBoundingClientRect();
-      if (r.bottom > 0 && r.top < innerHeight) el.style.transform = "translate3d(0," + ((r.top + r.height / 2 - innerHeight / 2) * -0.12).toFixed(1) + "px,0) scale(1.15)";
+      if (r.bottom > 0 && r.top < innerHeight) const f = el.classList.contains("banner-bg") ? 0.08 : 0.12; el.style.transform = "translate3d(0," + Math.max(-55, Math.min(55, (r.top + r.height / 2 - innerHeight / 2) * -f)).toFixed(1) + "px,0)" + (el.classList.contains("foot-bg") ? " scale(1.15)" : "");
     });
   };
   tick();
