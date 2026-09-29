@@ -31,7 +31,7 @@ h1{font-size:clamp(40px,6vw,76px)}
 h2{font-size:clamp(32px,4.4vw,52px)}
 h3{font-size:clamp(22px,2.4vw,28px)}
 p{color:var(--muted)}
-.lead{font-family:var(--head);font-style:italic;font-size:clamp(19px,2vw,23px);line-height:1.55;color:var(--offwhite)}
+.lead{font-family:var(--body);font-style:normal;font-size:clamp(16px,1.5vw,18px);letter-spacing:.04em;line-height:1.8;color:var(--offwhite)}
 .metal{background:linear-gradient(100deg,#9a9a9a 0%,#f4f4f4 35%,#b5b5b5 55%,#ececec 80%,#9c9c9c 100%);
   -webkit-background-clip:text;background-clip:text;color:transparent}
 .brass{color:var(--brass-2)}
@@ -104,7 +104,7 @@ section{padding:110px 0}
 /* marquee */
 .marquee{border-block:1px solid var(--line);overflow:hidden;padding:22px 0;white-space:nowrap}
 .marquee-track{display:inline-flex;gap:48px;animation:slide 38s linear infinite}
-.marquee span{font-family:var(--head);font-style:italic;font-size:26px;color:var(--steel)}
+.marquee span{font-family:var(--body);font-style:normal;font-size:15px;letter-spacing:.32em;text-transform:uppercase;color:var(--steel)}
 .marquee i{color:var(--brass);font-style:normal}
 @keyframes slide{to{transform:translateX(-50%)}}
 
