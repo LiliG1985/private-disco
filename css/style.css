@@ -678,3 +678,13 @@ body::after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;opa
 .detail:last-of-type{padding-bottom:20px}
 .hero{min-height:auto;padding-top:150px;padding-bottom:70px!important}
 @media (max-width:900px){.hero{padding-top:120px}}
+/* statement: whole photo on the right, text on the left */
+.statement{text-align:left;padding:150px 0}
+.statement-bg{inset:0;background-size:cover;background-position:right center;filter:none}
+.statement::before{background:linear-gradient(90deg,rgba(10,0,10,.92) 0%,rgba(10,0,10,.7) 38%,rgba(10,0,10,.05) 68%),linear-gradient(180deg,rgba(10,0,10,.5),transparent 25%,transparent 75%,rgba(10,0,10,.6))}
+.statement-inner{max-width:var(--wrap)}
+.statement-inner>*{max-width:640px}
+.statement blockquote{font-size:clamp(26px,3vw,42px)}
+@media (max-width:900px){.statement{text-align:center;padding:100px 0}.statement-bg{background-position:78% center}.statement::before{background:rgba(10,0,10,.72)}.statement-inner>*{margin-left:auto;margin-right:auto}}
+.page-banner{border-bottom:0}.page-banner+.marquee{background:rgba(10,0,10,.55);backdrop-filter:blur(6px)}
+.terms-split .cutout img{max-width:600px}

@@ -100,7 +100,7 @@
     const btn = form.querySelector("button[type=submit]");
     btn.disabled = true; btn.textContent = "Sending…";
     try {
-      const via = await window.PD.send("Competition entry: " + fields.Name + " — " + fields.Celebration, fields);
+      const via = await window.PD.send("Competition entry: " + fields.Name + " — " + fields.Celebration, fields, "competition");
       if (via === "email") {
         show("Thank you, " + fields.Name.split(" ")[0] + "! Your entry is in. We'll be in touch if you win — good luck.", true);
         form.reset(); selected = null; picked.textContent = "Tap a date"; picked.classList.add("none"); render();

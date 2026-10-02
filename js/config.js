@@ -18,5 +18,9 @@ window.PD_CONFIG = {
   // Free form service so competition entries + enquiries land in your inbox.
   // 1. Go to https://web3forms.com, enter your email, copy the Access Key.
   // 2. Paste it below. Until you do, forms open WhatsApp with the details filled in.
+  // Alex's Google Sheet web-app link (from setup/ALEX-SETUP.md). Paste it here.
+  // When set, every entry is saved to his sheet and emailed to him.
+  sheetEndpoint: "https://script.google.com/macros/s/AKfycbyjh6y5DvdrHgePF5cTXd3GtJsokpq9HFVwfB1V0K1dJ_yJebDSI5cC3XCIcyrjW_MkEQ/exec",
+
   web3formsKey: ""
 };

@@ -59,6 +59,15 @@
       '<a class="wa-float" href="' + waLink("Hi Private Disco, I'd like to enquire about an event.") + '" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">' + ICONS.wa + "</a>";
   }
 
+
+  /* ---------- scrolling banner under every page header ---------- */
+  const pb = document.querySelector(".page-banner");
+  if (pb && !document.querySelector(".marquee")) {
+    const items = ["Headline DJs", "Yacht Parties", "Live Acts", "Villa Nights", "Weddings", "Immersive Décor", "Brand Celebrations"];
+    const run = items.map((t) => "<span>" + t + " <i>✦</i></span>").join("");
+    pb.insertAdjacentHTML("afterend", '<div class="marquee" aria-hidden="true"><div class="marquee-track">' + run + run + "</div></div>");
+  }
+
   /* ---------- fill any [data-wa] / [data-mail] / [data-ig] links on the page ---------- */
   document.querySelectorAll("[data-wa]").forEach((a) => { a.href = waLink(a.dataset.wa); a.target = "_blank"; a.rel = "noopener"; });
   document.querySelectorAll("[data-mail]").forEach((a) => { a.href = mailLink(a.dataset.mail); });
@@ -109,8 +118,19 @@
   /* ---------- form sending ----------
      With a Web3Forms key: emails the entry to you.
      Without one: opens WhatsApp with the entry typed out, ready to send. */
-  window.PD.send = async function (subject, fields) {
+  window.PD.send = async function (subject, fields, type) {
     const lines = Object.entries(fields).filter(([, v]) => v).map(([k, v]) => k + ": " + v);
+    if (C.sheetEndpoint) {
+      // text/plain avoids a CORS preflight, which Google Apps Script doesn't answer
+      const res = await fetch(C.sheetEndpoint, {
+        method: "POST",
+        headers: { "Content-Type": "text/plain;charset=utf-8" },
+        body: JSON.stringify(Object.assign({ _type: type || "enquiry" }, fields))
+      });
+      const data = await res.json().catch(() => ({ ok: res.ok }));
+      if (!res.ok || data.ok === false) throw new Error(data.error || "Send failed");
+      return "email";
+    }
     if (C.web3formsKey) {
       const res = await fetch("https://api.web3forms.com/submit", {
         method: "POST",

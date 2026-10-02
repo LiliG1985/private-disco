@@ -18,15 +18,14 @@ Open **`js/config.js`** and change:
 - `email` – already set to `alexs@privatedisco.com`
 - `contactName` – name shown on the contact page
 - `instagram` – already set to `privatedisco`
-- `web3formsKey` – see step 2
+- `sheetEndpoint` – Alex's Google Sheet link, see step 2
 
 These are used everywhere on the site (header button, footer, floating WhatsApp button, contact cards).
 
-## 2. Get competition entries by email (free, 2 minutes)
-1. Go to https://web3forms.com, enter the email where entries should arrive.
-2. Copy the Access Key they email you into `web3formsKey` in `js/config.js`.
-
-Until a key is added, both forms still work: they open WhatsApp with the entry typed out and the person just presses send.
+## 2. Connect the forms to Alex's Google Sheet
+1. Alex follows `setup/ALEX-SETUP.md` (5 minutes, in his own Google account) and sends back his Web app URL.
+2. Paste it into `sheetEndpoint` in `js/config.js` and upload that file.
+Every competition entry and enquiry is then saved to his sheet and emailed to him. Until the link is added, forms open WhatsApp with the details filled in.
 
 ## 3. Put it on GitHub
 1. Create a new repository on github.com (e.g. `privatedisco-website`).
