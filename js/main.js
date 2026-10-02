@@ -30,7 +30,7 @@
   if (header) {
     header.outerHTML =
       '<header class="site-header"><div class="wrap nav">' +
-      '<a class="brand" href="index.html" aria-label="Private Disco home"><img src="assets/logo.png" alt="Private Disco" width="279" height="292"></a>' +
+      '<a class="brand" href="index.html" aria-label="Private Disco home"><img src="assets/logo.png?v=20261002095315" alt="Private Disco" width="279" height="292"></a>' +
       '<button class="menu-btn" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>' +
       '<ul class="nav-links">' +
       links.map(([h, t, k]) => '<li><a href="' + h + '"' + (k === page ? ' class="active"' : "") + ">" + t + "</a></li>").join("") +
@@ -47,7 +47,7 @@
       '<div class="foot-cta"><p class="eyebrow">Let\'s connect</p><h2>Let\'s bring your vision <span class="metal">to life.</span></h2>' +
       '<a class="btn btn-metal" href="' + waLink("Hi Private Disco, I'd like to enquire about an event.") + '" target="_blank" rel="noopener">' + ICONS.wa + 'Start the conversation</a></div>' +
       '<div class="foot">' +
-      '<div><img src="assets/logo.png" alt="Private Disco" width="279" height="292"><p>Talent-first event and entertainment experiences across the UAE.</p></div>' +
+      '<div><img src="assets/logo.png?v=20261002095315" alt="Private Disco" width="279" height="292"><p>Talent-first event and entertainment experiences across the UAE.</p></div>' +
       '<div><h4>Explore</h4><ul>' + links.map(([h, t]) => '<li><a href="' + h + '">' + t + "</a></li>").join("") + "</ul></div>" +
       '<div><h4>Get in touch</h4><ul>' +
       '<li><a href="' + waLink() + '" target="_blank" rel="noopener">WhatsApp ' + prettyWa + "</a></li>" +
