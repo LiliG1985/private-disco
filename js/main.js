@@ -68,6 +68,34 @@
     pb.insertAdjacentHTML("afterend", '<div class="marquee" aria-hidden="true"><div class="marquee-track">' + run + run + "</div></div>");
   }
 
+
+  /* ---------- page sliding: pages slide out/in when moving between them ---------- */
+  (function () {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const root = document.documentElement;
+    const dir = sessionStorage.getItem("pd-slide") || "next";
+    try { sessionStorage.removeItem("pd-slide"); } catch (e) {}
+    root.classList.add("pd-in-" + dir);
+    requestAnimationFrame(() => requestAnimationFrame(() => root.classList.add("pd-ready")));
+    const order = ["index.html", "services.html", "talent.html", "competition.html", "contact.html"];
+    const pageName = (u) => (u.pathname.split("/").pop() || "index.html");
+    document.addEventListener("click", (e) => {
+      const a = e.target.closest("a[href]");
+      if (!a || a.target === "_blank" || e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
+      const url = new URL(a.href, location.href);
+      if (url.origin !== location.origin || !/\.html$|\/$/.test(url.pathname)) return;
+      if (url.pathname === location.pathname) return;
+      e.preventDefault();
+      const from = order.indexOf(pageName(location)), to = order.indexOf(pageName(url));
+      const d = to < from ? "prev" : "next";
+      try { sessionStorage.setItem("pd-slide", d); } catch (err) {}
+      document.body.classList.remove("menu-open");
+      root.classList.add("pd-out-" + d);
+      setTimeout(() => { location.href = url.href; }, 420);
+    });
+    window.addEventListener("pageshow", (e) => { if (e.persisted) root.classList.remove("pd-out-next", "pd-out-prev"); });
+  })();
+
   /* ---------- fill any [data-wa] / [data-mail] / [data-ig] links on the page ---------- */
   document.querySelectorAll("[data-wa]").forEach((a) => { a.href = waLink(a.dataset.wa); a.target = "_blank"; a.rel = "noopener"; });
   document.querySelectorAll("[data-mail]").forEach((a) => { a.href = mailLink(a.dataset.mail); });

@@ -702,7 +702,7 @@ body::after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;opa
 
 /* ===== sliding site ===== */
 /* page enters sliding up, leaves sliding away */
-main{animation:pageIn .8s cubic-bezier(.2,.7,.2,1) both}
+/* main entrance handled by page sliding */
 @keyframes pageIn{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
 body.leaving main,body.leaving footer{opacity:0;transform:translateX(-40px);transition:opacity .35s ease,transform .35s ease}
 /* sections glide in from the sides */
@@ -727,3 +727,14 @@ body.leaving main,body.leaving footer{opacity:0;transform:translateX(-40px);tran
 @media (max-width:620px){.slider,.cards.slider{grid-auto-columns:72%;gap:14px}}
 @media (prefers-reduced-motion:reduce){main{animation:none}.reveal.from-left,.reveal.from-right{transform:none}}
 .slider-wrap{overflow:hidden;margin:0 -4px;padding:0 4px}.statement,.marquee{max-width:100vw;overflow:hidden}
+
+/* ===== page sliding transitions ===== */
+@media (prefers-reduced-motion:no-preference){
+  main,footer,.page-banner+.marquee{transition:transform .55s cubic-bezier(.65,0,.25,1),opacity .45s ease}
+  html.pd-in-next:not(.pd-ready) main,html.pd-in-next:not(.pd-ready) footer{transform:translate3d(8vw,0,0);opacity:0;transition:none}
+  html.pd-in-prev:not(.pd-ready) main,html.pd-in-prev:not(.pd-ready) footer{transform:translate3d(-8vw,0,0);opacity:0;transition:none}
+  html.pd-out-next main,html.pd-out-next footer{transform:translate3d(-8vw,0,0);opacity:0}
+  html.pd-out-prev main,html.pd-out-prev footer{transform:translate3d(8vw,0,0);opacity:0}
+  html.pd-out-next body::before,html.pd-out-prev body::before{opacity:.6}
+}
+html,body{overflow-x:hidden}
