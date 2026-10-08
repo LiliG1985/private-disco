@@ -96,7 +96,47 @@
   const io = "IntersectionObserver" in window ? new IntersectionObserver((es) => {
     es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
   }, { threshold: 0.12 }) : null;
-  document.querySelectorAll(".reveal").forEach((el) => (io ? io.observe(el) : el.classList.add("in")));
+  // alternate slide direction: section headings and split blocks glide in from the sides
+  document.querySelectorAll(".section-head.reveal, .split > .reveal, .detail.reveal, .venue.reveal, .band.reveal, .panel.reveal").forEach((el, i) => {
+    el.classList.add(i % 2 ? "from-right" : "from-left");
+  });
+  // stagger items inside grids
+  document.querySelectorAll(".arches, .cards, .talent-grid, .trio, .steps, .contact-cards, .venues").forEach((g) => {
+    [...g.children].forEach((c, i) => c.style.setProperty("--d", (Math.min(i, 8) * 0.09).toFixed(2) + "s"));
+  });
+  // items inside sideways sliders are revealed with their slider, not individually
+  document.querySelectorAll(".slider > .reveal").forEach((el) => el.classList.add("in-slider"));
+  document.querySelectorAll(".reveal:not(.in-slider)").forEach((el) => (io ? io.observe(el) : el.classList.add("in")));
+  const sio = "IntersectionObserver" in window ? new IntersectionObserver((es) => {
+    es.forEach((e) => { if (e.isIntersecting) { e.target.querySelectorAll(".reveal").forEach((c) => c.classList.add("in")); sio.unobserve(e.target); } });
+  }, { threshold: 0.1 }) : null;
+  document.querySelectorAll(".slider").forEach((s) => (sio ? sio.observe(s) : s.querySelectorAll(".reveal").forEach((c) => c.classList.add("in"))));
+
+  /* ---------- sideways sliders: arrows for talent / events / service rows ---------- */
+  document.querySelectorAll(".slider").forEach((s) => {
+    const wrap = document.createElement("div"); wrap.className = "slider-wrap";
+    s.parentNode.insertBefore(wrap, s); wrap.appendChild(s);
+    const nav = document.createElement("div"); nav.className = "slider-nav";
+    nav.innerHTML = '<button type="button" aria-label="Previous">\u2039</button><button type="button" aria-label="Next">\u203A</button>';
+    wrap.appendChild(nav);
+    const [prev, next] = nav.querySelectorAll("button");
+    const step = () => (s.firstElementChild ? s.firstElementChild.getBoundingClientRect().width + 22 : 300) * 2;
+    prev.onclick = () => s.scrollBy({ left: -step(), behavior: "smooth" });
+    next.onclick = () => s.scrollBy({ left: step(), behavior: "smooth" });
+    const upd = () => { prev.disabled = s.scrollLeft < 8; next.disabled = s.scrollLeft + s.clientWidth > s.scrollWidth - 8; };
+    s.addEventListener("scroll", upd, { passive: true }); addEventListener("resize", upd); setTimeout(upd, 300);
+  });
+
+  /* ---------- smooth slide between pages ---------- */
+  document.querySelectorAll('a[href$=".html"], a[href$=".html#local"], a[href*=".html#"]').forEach((a) => {
+    a.addEventListener("click", (e) => {
+      if (e.metaKey || e.ctrlKey || a.target === "_blank") return;
+      const url = a.getAttribute("href"); if (!url || url.startsWith("#")) return;
+      e.preventDefault(); document.body.classList.add("leaving");
+      setTimeout(() => (location.href = url), 380);
+    });
+  });
+  addEventListener("pageshow", () => document.body.classList.remove("leaving"));
 
   /* ---------- subtle motion: slow parallax on header & footer imagery only ---------- */
   const still = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
