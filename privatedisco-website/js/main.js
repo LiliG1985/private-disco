@@ -96,6 +96,14 @@
     window.addEventListener("pageshow", (e) => { if (e.persisted) root.classList.remove("pd-out-next", "pd-out-prev"); });
   })();
 
+
+  /* ---------- events: expanding panels ---------- */
+  document.querySelectorAll(".xpanels").forEach((g) => {
+    const ps = [...g.querySelectorAll(".xp")];
+    const open = (p) => ps.forEach((x) => x.classList.toggle("open", x === p));
+    ps.forEach((p) => { p.addEventListener("mouseenter", () => open(p)); p.addEventListener("focus", () => open(p)); p.addEventListener("click", () => open(p)); });
+  });
+
   /* ---------- fill any [data-wa] / [data-mail] / [data-ig] links on the page ---------- */
   document.querySelectorAll("[data-wa]").forEach((a) => { a.href = waLink(a.dataset.wa); a.target = "_blank"; a.rel = "noopener"; });
   document.querySelectorAll("[data-mail]").forEach((a) => { a.href = mailLink(a.dataset.mail); });

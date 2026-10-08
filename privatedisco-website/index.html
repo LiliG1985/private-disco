@@ -12,13 +12,15 @@
 <link rel="icon" href="assets/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css?v=20261008171129">
+<link rel="stylesheet" href="css/style.css?v=20261008180622">
 </head>
 <body data-page="home">
 <div id="site-header"></div>
 
 <main>
-  <section class="wrap hero" style="padding-bottom:40px">
+  <section class="hero-full">
+    <div class="hero-bg" aria-hidden="true"></div>
+    <div class="wrap hero">
     <div>
       <p class="eyebrow">Talent-first event experiences · UAE</p>
       <img class="hero-logo" src="assets/logo.png?v=20261002095315" alt="Private Disco" width="558" height="584">
@@ -28,10 +30,7 @@
         <a class="btn btn-ghost" href="competition.html">Win a Private Disco</a>
       </div>
     </div>
-    <figure class="hero-photo">
-      <img src="assets/photos/mirrorballs.jpg" alt="Mirror balls above a crowd on the dance floor" width="736" height="981">
-      <figcaption>From concept to dancefloor</figcaption>
-    </figure>
+    </div>
   </section>
 
   <div class="marquee" aria-hidden="true"><div class="marquee-track">
@@ -135,13 +134,69 @@
     <div class="section-head reveal">
       <p class="eyebrow">Events we specialise in</p>
       <h2>Intimate or large-scale, <span class="metal">the same care</span></h2>
+      <p>Every celebration is different. Hover over each one to see how we bring it to life.</p>
     </div>
-    <div class="cards">
-      <div class="card reveal"><img src="assets/events/yacht.jpg" alt="" loading="lazy"><span>Yacht parties</span></div>
-      <div class="card reveal"><img src="assets/events/private.jpg" alt="" loading="lazy"><span>Villa &amp; private parties, milestone birthdays</span></div>
-      <div class="card reveal"><img src="assets/events/wedding.jpg" alt="" loading="lazy"><span>Weddings &amp; engagements</span></div>
-      <div class="card reveal"><img src="assets/events/corporate.jpg" alt="" loading="lazy"><span>Corporate events &amp; brand celebrations</span></div>
-      <div class="card reveal"><img src="assets/events/social.jpg" alt="" loading="lazy"><span>High-impact social events</span></div>
+    <div class="xpanels reveal">
+      <article class="xp open" tabindex="0">
+        <img src="assets/events/yacht.jpg" alt="" loading="lazy">
+        <div class="xp-shade"></div>
+        <span class="xp-num">01</span>
+        <h3 class="xp-vert">Yacht parties</h3>
+        <div class="xp-body">
+          <span class="xp-n">01</span>
+          <h3>Yacht parties</h3>
+          <p>Sunset sets on the top deck, marine-ready sound and a dance floor on the water.</p>
+          <a class="btn btn-ghost" data-wa="Hi Private Disco, I'd like to plan a yacht party.">Plan yours</a>
+        </div>
+      </article>
+      <article class="xp" tabindex="0">
+        <img src="assets/events/private.jpg" alt="" loading="lazy">
+        <div class="xp-shade"></div>
+        <span class="xp-num">02</span>
+        <h3 class="xp-vert">Villa nights &amp; milestone birthdays</h3>
+        <div class="xp-body">
+          <span class="xp-n">02</span>
+          <h3>Villa nights &amp; milestone birthdays</h3>
+          <p>Poolside DJs, terrace dance floors and full villa takeovers, cleared away by morning.</p>
+          <a class="btn btn-ghost" data-wa="Hi Private Disco, I'd like to plan a villa party.">Plan yours</a>
+        </div>
+      </article>
+      <article class="xp" tabindex="0">
+        <img src="assets/events/wedding.jpg" alt="" loading="lazy">
+        <div class="xp-shade"></div>
+        <span class="xp-num">03</span>
+        <h3 class="xp-vert">Weddings &amp; engagements</h3>
+        <div class="xp-body">
+          <span class="xp-n">03</span>
+          <h3>Weddings &amp; engagements</h3>
+          <p>From the first dance to the last song, music and styling built around your day.</p>
+          <a class="btn btn-ghost" data-wa="Hi Private Disco, I'd like to talk about a wedding.">Plan yours</a>
+        </div>
+      </article>
+      <article class="xp" tabindex="0">
+        <img src="assets/events/corporate.jpg" alt="" loading="lazy">
+        <div class="xp-shade"></div>
+        <span class="xp-num">04</span>
+        <h3 class="xp-vert">Corporate &amp; brand celebrations</h3>
+        <div class="xp-body">
+          <span class="xp-n">04</span>
+          <h3>Corporate &amp; brand celebrations</h3>
+          <p>Launches, galas and staff parties with headline talent and on-brand production.</p>
+          <a class="btn btn-ghost" data-wa="Hi Private Disco, I'd like to plan a corporate event.">Plan yours</a>
+        </div>
+      </article>
+      <article class="xp" tabindex="0">
+        <img src="assets/events/social.jpg" alt="" loading="lazy">
+        <div class="xp-shade"></div>
+        <span class="xp-num">05</span>
+        <h3 class="xp-vert">High-impact social events</h3>
+        <div class="xp-body">
+          <span class="xp-n">05</span>
+          <h3>High-impact social events</h3>
+          <p>Big-night energy for private clubs, festivals and statement celebrations.</p>
+          <a class="btn btn-ghost" data-wa="Hi Private Disco, I'd like to plan an event.">Plan yours</a>
+        </div>
+      </article>
     </div>
   </section>
 
@@ -204,7 +259,7 @@
 </main>
 
 <div id="site-footer"></div>
-<script src="js/config.js?v=20261008162959"></script>
-<script src="js/main.js?v=20261008162959"></script>
+<script src="js/config.js?v=20261008172415"></script>
+<script src="js/main.js?v=20261008172415"></script>
 </body>
 </html>
