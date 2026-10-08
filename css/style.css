@@ -890,3 +890,19 @@ html,body{overflow-x:hidden}
   .arch-track .arch-card h3{font-size:20px;bottom:66px}
   .arch-track .arch-card p{font-size:12px;bottom:20px}
 }
+
+/* ===== full-width title strip ===== */
+.title-strip{position:relative;margin:0 calc(50% - 50vw) 64px;padding:clamp(64px,8vw,104px) 24px;text-align:center;overflow:hidden;isolation:isolate}
+.title-strip::before,.title-strip::after{content:"";position:absolute;left:0;right:0;height:1px;background:var(--chrome);z-index:2;opacity:.85}
+.title-strip::before{top:0}.title-strip::after{bottom:0}
+.ts-bg{position:absolute;inset:0;z-index:-2;background-size:cover;background-position:center;filter:saturate(.7) brightness(.42) contrast(1.05);transform:scale(1.04)}
+.title-strip > .ts-bg + .ts-inner::before{content:"";position:absolute;inset:0;z-index:-1;
+  background:radial-gradient(ellipse 60% 90% at 50% 50%,rgba(10,0,10,.55),rgba(10,0,10,.15) 70%),linear-gradient(90deg,rgba(23,0,18,.85),rgba(23,0,18,.2) 30%,rgba(23,0,18,.2) 70%,rgba(23,0,18,.85))}
+.ts-inner{max-width:860px;margin:0 auto}
+.ts-inner .eyebrow{justify-content:center}
+.ts-inner h2{font-size:clamp(40px,5.4vw,76px);line-height:1.05;margin:16px 0 20px}
+.ts-inner > p:not(.eyebrow){max-width:640px;margin:0 auto;color:rgba(237,235,228,.78)}
+@media (max-width:640px){.title-strip{margin-bottom:40px}}
+.ts-inner .eyebrow::after{content:"";display:inline-block;width:40px;height:1px;background:currentColor;opacity:.6;vertical-align:middle;margin-left:16px}
+.ts-inner .eyebrow::after{width:28px;margin-left:14px;opacity:.7;background:linear-gradient(90deg,#e9e9ee,transparent)}
+.ts-bg{filter:saturate(.8) brightness(.75) contrast(1.05)}
