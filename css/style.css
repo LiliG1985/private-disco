@@ -811,3 +811,82 @@ html,body{overflow-x:hidden}
 .split-media img{filter:sepia(.12) saturate(.9) brightness(.96) contrast(1.05)!important}
 .split-media::after{content:"";position:absolute;inset:0;pointer-events:none;mix-blend-mode:soft-light;
   background:radial-gradient(ellipse at 40% 35%,rgba(150,80,170,.3),rgba(60,10,50,.45) 75%)}
+
+/* ===== events: revolving roster ===== */
+.roster{position:relative}
+.rv-stage{position:relative;height:600px;perspective:1600px;transform-style:preserve-3d}
+.rv-card{position:absolute;left:50%;top:0;width:min(440px,78vw);height:100%;margin-left:calc(min(440px,78vw)/-2);overflow:hidden;cursor:pointer;
+  border:1px solid rgba(220,220,228,.16);box-shadow:0 40px 80px -30px rgba(0,0,0,.85);
+  transition:transform 1s cubic-bezier(.6,0,.2,1),opacity 1s,filter 1s;will-change:transform}
+.rv-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.rv-shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,0,10,.05) 30%,rgba(10,0,10,.92) 100%)}
+.rv-card.is-center{border-color:rgba(235,235,242,.5);cursor:default}
+.rv-card.is-center::before{content:"";position:absolute;left:0;right:0;top:0;height:2px;background:var(--chrome);z-index:2}
+.rv-body{position:absolute;left:0;right:0;bottom:0;padding:32px 34px;z-index:1}
+.rv-n{display:block;font-family:var(--head);font-style:italic;font-size:52px;line-height:1;color:transparent;-webkit-text-stroke:1px rgba(235,235,242,.6);margin-bottom:8px}
+.rv-body h3{font-style:normal;font-weight:300;font-size:30px;margin-bottom:10px}
+.rv-body p,.rv-body .btn{opacity:0;transform:translateY(12px);transition:opacity .5s,transform .6s}
+.rv-card.is-center .rv-body p,.rv-card.is-center .rv-body .btn{opacity:1;transform:none;transition-delay:.45s}
+.rv-body p{color:rgba(237,235,228,.82);margin-bottom:18px;font-size:15px}
+.rv-controls{display:flex;align-items:center;justify-content:center;gap:22px;margin-top:38px}
+.rv-controls button{width:52px;height:52px;border-radius:50%;border:1px solid rgba(220,220,228,.5);background:rgba(255,255,255,.03);color:#ededf2;font-size:26px;line-height:1;cursor:pointer;transition:background .3s,color .3s}
+.rv-controls button:hover{background:var(--chrome);color:#120010}
+.rv-dots{display:flex;gap:10px}
+.rv-dots button{width:28px;height:2px;border-radius:0;border:0;padding:0;background:rgba(220,220,228,.25);cursor:pointer}
+.rv-dots button.on{background:var(--chrome)}
+@media (max-width:700px){.rv-stage{height:500px}.rv-body{padding:24px}.rv-body h3{font-size:24px}.rv-n{font-size:40px}}
+
+/* ===== services arches: revolving roster ===== */
+.arch-roster .rv-stage.arches{display:block;height:640px;perspective:1700px;transform-style:preserve-3d;gap:0}
+.arch-roster .arch-card{position:absolute;left:50%;top:0;width:300px;margin-left:-150px;cursor:pointer;
+  transition:transform 1s cubic-bezier(.6,0,.2,1),opacity 1s,filter 1s;will-change:transform}
+.arch-roster .arch-card.is-center{cursor:pointer}
+.arch-roster .arch{margin-bottom:22px}
+.arch-roster .arch-card p{opacity:0;transform:translateY(10px);transition:opacity .5s,transform .6s}
+.arch-roster .arch-card.is-center p{opacity:1;transform:none;transition-delay:.45s}
+.arch-roster .arch-card.is-center .arch::after{inset:12px;border-color:rgba(255,255,255,.85)}
+.arch-roster .arch-card.is-center .arch{box-shadow:0 30px 80px -30px rgba(0,0,0,.8),0 0 0 1px rgba(235,235,242,.18)}
+.arch-roster .rv-controls{margin-top:24px}
+@media (max-width:700px){
+  .arch-roster .rv-stage.arches{height:520px}
+  .arch-roster .arch-card{width:230px;margin-left:-115px}
+}
+.arch-roster .rv-stage.arches{height:570px}
+.arch-roster .arch-card:not(.is-center) h3,.arch-roster .arch-card:not(.is-center) .arch-num{opacity:.55}
+@media (max-width:700px){
+  .arch-roster .rv-stage.arches{height:450px}
+  .arch-roster .rv-controls{gap:14px}
+  .arch-roster .rv-prev,.arch-roster .rv-next{width:44px;height:44px;flex:none}
+  .arch-roster .rv-dots{gap:5px}
+  .arch-roster .rv-dots button{width:12px}
+}
+
+/* ===== services arches: continuous banner ===== */
+.arch-banner{position:relative;overflow:hidden;margin:0 calc(50% - 50vw);padding:10px 0;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.arch-track{display:flex;gap:30px;width:max-content;animation:archLoop 70s linear infinite}
+.arch-banner:hover .arch-track{animation-play-state:paused}
+.arch-track .arch-card{flex:none;width:260px}
+@keyframes archLoop{to{transform:translateX(calc(-50% - 15px))}}
+@media (max-width:640px){.arch-track{gap:18px;animation-duration:55s}.arch-track .arch-card{width:190px}@keyframes archLoop{to{transform:translateX(calc(-50% - 9px))}}}
+@media (prefers-reduced-motion:reduce){.arch-track{animation:none}.arch-banner{overflow-x:auto}}
+
+/* ===== services banner: framed portrait panels (replaces arch shape) ===== */
+.arch-track .arch-card{position:relative;width:280px;text-align:left;align-items:stretch}
+.arch-track .arch{aspect-ratio:3/4.4;border-radius:2px;margin:0;box-shadow:0 30px 60px -20px rgba(0,0,0,.7);border:1px solid rgba(220,220,228,.16)}
+.arch-track .arch::after{border-radius:0;inset:10px;border-color:rgba(232,232,238,.32)}
+.arch-track .arch-card:hover .arch::after{inset:10px;border-color:rgba(255,255,255,.8)}
+.arch-track .arch::before{opacity:1;background:linear-gradient(180deg,rgba(10,0,10,0) 40%,rgba(10,0,10,.55) 65%,rgba(10,0,10,.94))}
+.arch-track .arch-card:hover .arch::before{opacity:1}
+.arch-track .arch-card::before{content:"";position:absolute;left:0;right:0;top:0;height:2px;background:var(--chrome);z-index:4;transform:scaleX(.25);transform-origin:left;transition:transform .8s cubic-bezier(.6,0,.2,1)}
+.arch-track .arch-card:hover::before{transform:scaleX(1)}
+.arch-track .arch-num,.arch-track .arch-card h3,.arch-track .arch-card p{position:absolute;left:28px;right:28px;z-index:3;margin:0}
+.arch-track .arch-num{top:26px;font-size:11px}
+.arch-track .arch-card h3{bottom:78px;font-size:26px;line-height:1.15}
+.arch-track .arch-card p{bottom:28px;max-width:none;font-size:13px;line-height:1.55;color:rgba(237,235,228,.75);min-height:40px}
+@media (max-width:640px){
+  .arch-track .arch-card{width:210px}
+  .arch-track .arch-num,.arch-track .arch-card h3,.arch-track .arch-card p{left:20px;right:20px}
+  .arch-track .arch-card h3{font-size:20px;bottom:66px}
+  .arch-track .arch-card p{font-size:12px;bottom:20px}
+}

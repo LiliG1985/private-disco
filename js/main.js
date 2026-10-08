@@ -104,6 +104,44 @@
     ps.forEach((p) => { p.addEventListener("mouseenter", () => open(p)); p.addEventListener("focus", () => open(p)); p.addEventListener("click", () => open(p)); });
   });
 
+
+  /* ---------- revolving roster (services arches) ---------- */
+  document.querySelectorAll(".roster").forEach((r) => {
+    const cards = [...r.querySelectorAll(r.dataset.card || ".rv-card")], n = cards.length;
+    const arch = r.classList.contains("arch-roster");
+    const dots = r.querySelector(".rv-dots");
+    let cur = 0, timer;
+    cards.forEach((_, i) => { const b = document.createElement("button"); b.setAttribute("aria-label", "Show item " + (i + 1)); b.onclick = () => { go(i); restart(); }; dots.appendChild(b); });
+    const narrow = () => innerWidth < 700;
+    function layout() {
+      cards.forEach((c, i) => {
+        let o = i - cur; if (o > n / 2) o -= n; if (o < -n / 2) o += n;
+        const a = Math.abs(o), max = arch ? (narrow() ? 1 : 3) : 2;
+        const step = arch ? (narrow() ? 150 : 250 - a * 18) : (narrow() ? 62 : 300);
+        const x = arch ? Math.sign(o) * [0, 1, 1.85, 2.55][Math.min(a, 3)] * (narrow() ? 150 : 250) : o * step;
+        c.style.transform = "translateX(" + x + "px) translateZ(" + (-a * (arch ? 180 : 220)) + "px) rotateY(" + (-o * (arch ? 22 : 28)) + "deg) scale(" + (1 - a * 0.06) + ")";
+        c.style.opacity = a > max ? 0 : (a === 0 ? 1 : 1 - a * (arch ? 0.22 : 0.3));
+        if (arch) c.setAttribute("tabindex", a > max ? "-1" : "0");
+        c.style.filter = a ? "brightness(" + ((arch ? 0.72 : 0.55) - a * 0.1) + ") saturate(.8)" : "none";
+        c.style.zIndex = 10 - a; c.style.pointerEvents = a > max ? "none" : "auto";
+        c.classList.toggle("is-center", o === 0);
+      });
+      [...dots.children].forEach((d, i) => d.classList.toggle("on", i === cur));
+    }
+    const go = (i) => { cur = (i + n) % n; layout(); };
+    const restart = () => { clearInterval(timer); if (!matchMedia("(prefers-reduced-motion: reduce)").matches) timer = setInterval(() => go(cur + 1), 4500); };
+    cards.forEach((c, i) => c.addEventListener("click", (e) => { if (i !== cur) { e.preventDefault(); go(i); restart(); } }));
+    r.querySelector(".rv-prev").onclick = () => { go(cur - 1); restart(); };
+    r.querySelector(".rv-next").onclick = () => { go(cur + 1); restart(); };
+    r.addEventListener("mouseenter", () => clearInterval(timer));
+    r.addEventListener("mouseleave", restart);
+    let sx = null;
+    r.addEventListener("touchstart", (e) => { sx = e.touches[0].clientX; }, { passive: true });
+    r.addEventListener("touchend", (e) => { if (sx === null) return; const dx = e.changedTouches[0].clientX - sx; if (Math.abs(dx) > 40) { go(cur + (dx < 0 ? 1 : -1)); restart(); } sx = null; });
+    addEventListener("resize", layout);
+    layout(); restart();
+  });
+
   /* ---------- fill any [data-wa] / [data-mail] / [data-ig] links on the page ---------- */
   document.querySelectorAll("[data-wa]").forEach((a) => { a.href = waLink(a.dataset.wa); a.target = "_blank"; a.rel = "noopener"; });
   document.querySelectorAll("[data-mail]").forEach((a) => { a.href = mailLink(a.dataset.mail); });
