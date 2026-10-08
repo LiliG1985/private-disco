@@ -737,3 +737,17 @@ body.leaving main,body.leaving footer{opacity:0;transform:translateX(-40px);tran
   html.pd-out-prev :is(.site-header,main,footer,.wa-float){transform:translate3d(100vw,0,0)}
 }
 html,body{overflow-x:hidden}
+
+/* ===== services detail blocks: layered panels with depth ===== */
+.detail{position:relative;isolation:isolate;margin:28px 0;padding:72px 64px!important;border:1px solid rgba(220,220,228,.12)!important;
+  background:radial-gradient(70% 90% at 0% 0%,rgba(110,48,120,.32),transparent 60%),radial-gradient(60% 80% at 100% 100%,rgba(96,28,66,.28),transparent 65%),linear-gradient(160deg,rgba(32,16,38,.85),rgba(10,0,10,.75));
+  box-shadow:0 40px 80px -30px rgba(0,0,0,.75),inset 0 1px 0 rgba(255,255,255,.06);overflow:hidden}
+.detail::before{content:"";position:absolute;left:0;right:0;top:0;height:1px;background:linear-gradient(90deg,transparent,#e9e9ee 30%,#ffffff 50%,#a7a7af 70%,transparent)}
+.detail::after{content:attr(data-num);position:absolute;right:36px;bottom:-34px;font-family:var(--head);font-style:italic;font-weight:300;font-size:260px;line-height:1;
+  color:transparent;-webkit-text-stroke:1px rgba(230,230,240,.13);pointer-events:none;z-index:-1}
+.detail .cols>div{padding:26px 26px 22px;border:1px solid rgba(220,220,228,.1);background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.008));
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.05),0 18px 40px -24px rgba(0,0,0,.7);backdrop-filter:blur(4px);transition:border-color .4s,transform .4s}
+.detail .cols>div:hover{border-color:rgba(230,230,240,.3);transform:translateY(-3px)}
+.detail h4{padding-bottom:12px;margin-bottom:16px;border-bottom:1px solid rgba(220,220,228,.12)}
+.detail h2{text-shadow:0 10px 40px rgba(0,0,0,.6)}
+@media (max-width:860px){.detail{padding:44px 24px!important}.detail::after{font-size:160px;bottom:-30px}}
