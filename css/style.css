@@ -975,3 +975,10 @@ html,body{overflow-x:hidden}
 .wf-img{animation:none!important;will-change:auto}
 html.pd-ready :is(.site-header,main,footer,.wa-float){transition:transform .45s cubic-bezier(.77,0,.18,1),background .3s,border-color .3s!important}
 .comp-flow .wf-blur{display:none}
+
+/* services detail: soft background photo */
+.detail.has-photo{overflow:hidden}
+.detail-photo{position:absolute;left:0;top:0;bottom:0;width:52%;z-index:-1;background-size:cover;background-position:center 35%;opacity:.55;filter:saturate(.85);
+  -webkit-mask-image:radial-gradient(ellipse 70% 70% at 40% 55%,#000 25%,transparent 75%);mask-image:radial-gradient(ellipse 70% 70% at 40% 55%,#000 25%,transparent 75%)}
+.detail.has-photo::after{z-index:0}
+@media (max-width:860px){.detail-photo{width:100%;opacity:.28;-webkit-mask-image:radial-gradient(ellipse 80% 60% at 50% 30%,#000 20%,transparent 75%);mask-image:radial-gradient(ellipse 80% 60% at 50% 30%,#000 20%,transparent 75%)}}
