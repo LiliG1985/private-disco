@@ -969,3 +969,9 @@ html,body{overflow-x:hidden}
 .comp-flow .wf-img{background-size:cover;background-position:right 30%}
 @media (max-width:900px){.comp-flow .wf-img{background-image:url(../assets/photos/boombox-plum.jpg)!important;background-position:center 30%}}
 .comp-flow .wf-blur{opacity:.35;background-position:right center;background-size:60% auto;background-repeat:no-repeat;filter:blur(60px) brightness(.35)}
+/* performance: pre-blurred images instead of live blur, no repaint animation */
+.wf-blur,.comp-flow .wf-blur{filter:none;opacity:.8;background-size:cover;background-repeat:no-repeat}
+.comp-flow .wf-blur{opacity:.5;background-size:60% 100%;background-position:right center}
+.wf-img{animation:none!important;will-change:auto}
+html.pd-ready :is(.site-header,main,footer,.wa-float){transition:transform .45s cubic-bezier(.77,0,.18,1),background .3s,border-color .3s!important}
+.comp-flow .wf-blur{display:none}

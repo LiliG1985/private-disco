@@ -91,7 +91,7 @@
       try { sessionStorage.setItem("pd-slide", d); } catch (err) {}
       document.body.classList.remove("menu-open");
       root.classList.add("pd-out-" + d);
-      setTimeout(() => { location.href = url.href; }, 680);
+      setTimeout(() => { location.href = url.href; }, 430);
     });
     window.addEventListener("pageshow", (e) => { if (e.persisted) root.classList.remove("pd-out-next", "pd-out-prev"); });
   })();
