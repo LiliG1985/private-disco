@@ -180,7 +180,7 @@
     const m = url.match(/\/to\/([A-Za-z0-9]+)/);
     if (!m) { slot.innerHTML = '<p class="tf-wait">Message Alex directly on WhatsApp or email below and we\'ll come back with ideas and a proposal.</p>'; return; }
     const go = () => {
-      slot.innerHTML = '<div data-tf-widget="' + m[1] + '" data-tf-opacity="0" data-tf-inline-on-mobile data-tf-iframe-props="title=Private Disco enquiry" data-tf-transitive-search-params data-tf-medium="privatedisco-site" style="width:100%;height:620px"></div>';
+      slot.innerHTML = '<div data-tf-widget="' + m[1] + '" data-tf-inline-on-mobile data-tf-iframe-props="title=Private Disco enquiry" data-tf-transitive-search-params data-tf-medium="privatedisco-site" style="width:100%;height:620px"></div>';
       if (!document.querySelector('script[src*="embed.typeform.com"]')) {
         const sc = document.createElement("script"); sc.src = "https://embed.typeform.com/next/embed.js"; sc.async = true; document.body.appendChild(sc);
       } else if (window.tf && window.tf.load) window.tf.load();
