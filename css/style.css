@@ -987,3 +987,20 @@ html.pd-ready :is(.site-header,main,footer,.wa-float){transition:transform .45s 
 #decor .detail-photo,#planning .detail-photo{width:100%;opacity:.5;background-size:cover;background-position:center 55%;
   -webkit-mask-image:radial-gradient(ellipse 60% 85% at 38% 55%,#000 30%,transparent 78%);mask-image:radial-gradient(ellipse 60% 85% at 38% 55%,#000 30%,transparent 78%)}
 @media (max-width:860px){#decor .detail-photo,#planning .detail-photo{opacity:.28}}
+
+/* services: enquiry buttons + interest picker */
+.detail-actions{display:flex;flex-wrap:wrap;gap:14px;margin-top:30px}
+.enq-form{max-width:1000px;margin:20px auto 0;scroll-margin-top:110px}
+#enquire{scroll-margin-top:100px}
+.enq-title{font-size:clamp(32px,3.8vw,52px);margin:12px 0 14px}
+.enq-sub{color:rgba(237,235,228,.72);max-width:620px;margin-bottom:28px}
+.chips{display:flex;flex-wrap:wrap;gap:12px}
+.chip{position:relative;cursor:pointer}
+.chip input{position:absolute;opacity:0;pointer-events:none}
+.chip span{display:inline-block;padding:12px 20px;border:1px solid rgba(220,220,228,.3);font-size:13.5px;letter-spacing:.04em;color:#e8e6ee;background:rgba(255,255,255,.03);transition:background .3s,color .3s,border-color .3s}
+.chip:hover span{border-color:rgba(235,235,242,.7)}
+.chip input:checked+span{background:var(--chrome);color:#140010;border-color:transparent}
+.chip input:focus-visible+span{outline:1px solid #fff;outline-offset:3px}
+.field.full{grid-column:1/-1}
+@media (max-width:640px){.chip span{padding:10px 14px;font-size:12.5px}}
+.chip,.chip span{text-transform:none;letter-spacing:.03em;font-size:14px}
