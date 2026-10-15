@@ -959,3 +959,12 @@ html,body{overflow-x:hidden}
 @media (max-width:900px){.who-flow::after{background:linear-gradient(180deg,transparent 30%,rgba(10,0,10,.5))}}
 .band-bg.band-boombox{background-position:center 28%;opacity:1}
 .band-bg.band-boombox{background-position:center 40%}
+/* competition: same flowing treatment */
+.comp-flow{min-height:760px}
+.comp-flow .wf-img{width:min(1050px,68vw);background-position:center 38%;animation:none}
+.comp-flow .wf-blur{background-position:center 40%}
+@media (max-width:900px){.comp-flow .wf-img{width:100%;height:460px;background-position:center 30%}}
+.comp-flow .wf-img{width:min(1200px,78vw);background-size:auto 150%;background-repeat:no-repeat;background-position:right 28%}
+@media (max-width:900px){.comp-flow .wf-img{width:100%;background-size:cover;background-position:center 30%}}
+.comp-flow .wf-img{background-size:cover;background-position:right 30%}
+@media (max-width:900px){.comp-flow .wf-img{background-image:url(../assets/photos/boombox-plum.jpg)!important;background-position:center 30%}}
