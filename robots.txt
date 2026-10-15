@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://lilig1985.github.io/private-disco/sitemap.xml
+Sitemap: https://privatedisco.com/sitemap.xml

@@ -77,6 +77,7 @@
     try { sessionStorage.removeItem("pd-slide"); } catch (e) {}
     root.classList.add("pd-in-" + dir);
     requestAnimationFrame(() => requestAnimationFrame(() => root.classList.add("pd-ready")));
+    setTimeout(() => root.classList.add("pd-ready"), 120); // fallback if animation frames are paused
     const order = ["index.html", "services.html", "talent.html", "competition.html", "contact.html"];
     const pageName = (u) => (u.pathname.split("/").pop() || "index.html");
     document.addEventListener("click", (e) => {
@@ -143,15 +144,34 @@
   });
 
 
-  /* ---------- lazy YouTube: load the player only when tapped ---------- */
-  document.querySelectorAll(".yt-lite").forEach((b) => b.addEventListener("click", () => {
-    const f = document.createElement("iframe");
-    f.src = "https://www.youtube-nocookie.com/embed/" + b.dataset.yt + "?autoplay=1&playsinline=1&rel=0&modestbranding=1";
-    f.title = b.getAttribute("aria-label") || "Video";
-    f.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
-    f.allowFullscreen = true;
-    b.replaceWith(f);
-  }, { once: true }));
+  /* ---------- promo video: autoplays (muted) when scrolled into view, YouTube loads only then ---------- */
+  document.querySelectorAll(".yt-auto").forEach((box) => {
+    const id = box.dataset.yt; let frame = null, loaded = false;
+    const send = (func, args) => frame && frame.contentWindow.postMessage(JSON.stringify({ event: "command", func, args: args || [] }), "*");
+    const load = () => {
+      if (loaded) return; loaded = true;
+      frame = document.createElement("iframe");
+      frame.src = "https://www.youtube-nocookie.com/embed/" + id + "?autoplay=1&mute=1&loop=1&playlist=" + id + "&controls=0&playsinline=1&rel=0&modestbranding=1&enablejsapi=1&origin=" + encodeURIComponent(location.origin);
+      frame.title = "Private Disco competition video";
+      frame.allow = "autoplay; encrypted-media; picture-in-picture";
+      frame.setAttribute("tabindex", "-1");
+      frame.addEventListener("load", () => setTimeout(() => box.classList.add("is-playing"), 700));
+      box.appendChild(frame);
+    };
+    const snd = box.querySelector(".yt-sound");
+    snd.addEventListener("click", () => {
+      load();
+      const on = !box.classList.contains("sound-on");
+      send(on ? "unMute" : "mute"); send("playVideo");
+      box.classList.toggle("sound-on", on);
+      snd.querySelector("span").textContent = on ? "Sound off" : "Tap for sound";
+    });
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver((es) => es.forEach((e) => {
+        if (e.isIntersecting) { load(); send("playVideo"); } else if (loaded) send("pauseVideo");
+      }), { rootMargin: "150px 0px", threshold: 0.25 }).observe(box);
+    } else load();
+  });
 
   /* ---------- fill any [data-wa] / [data-mail] / [data-ig] links on the page ---------- */
   document.querySelectorAll("[data-wa]").forEach((a) => { a.href = waLink(a.dataset.wa); a.target = "_blank"; a.rel = "noopener"; });

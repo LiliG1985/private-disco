@@ -1142,3 +1142,13 @@ html.pd-ready :is(.site-header,main,footer,.wa-float){transition:transform .45s 
 .yt-lite:hover .yt-play{transform:translate(-50%,-50%) scale(1.08)}
 .yt-label{position:absolute;left:0;right:0;bottom:22px;text-align:center;font-size:11px;letter-spacing:.38em;text-transform:uppercase;color:#f2f2f5}
 @media (max-width:900px){.vid-wrap{grid-template-columns:1fr;gap:44px}.vid-frame{width:min(300px,82vw)}}
+/* autoplay promo video */
+.yt-auto{position:relative;width:100%;height:100%;overflow:hidden;background:#0d000b}
+.yt-auto .yt-poster,.yt-auto iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.yt-auto .yt-poster{object-fit:cover;z-index:2;transition:opacity .8s}
+.yt-auto iframe{z-index:1;pointer-events:none;transform:scale(1.02)}
+.yt-auto.is-playing .yt-poster{opacity:0}
+.yt-sound{position:absolute;z-index:3;left:50%;bottom:20px;transform:translateX(-50%);display:flex;align-items:center;gap:10px;padding:11px 18px;border:1px solid rgba(235,235,242,.5);background:rgba(10,0,10,.55);backdrop-filter:blur(6px);color:#f2f2f5;font-size:10.5px;letter-spacing:.3em;text-transform:uppercase;cursor:pointer;white-space:nowrap;transition:background .3s,color .3s}
+.yt-sound svg{width:16px;height:16px}
+.yt-sound:hover,.yt-auto.sound-on .yt-sound{background:var(--chrome);color:#140010;border-color:transparent}
+.cards .card span::before{content:"";display:block;width:34px;height:1px;background:linear-gradient(90deg,#f2f2f5,#9d9da6);margin-bottom:14px}

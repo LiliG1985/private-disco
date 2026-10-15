@@ -1,6 +1,6 @@
 /* =========================================================
    PRIVATE DISCO — SITE SETTINGS
-   Edit the values below, commit, and Vercel redeploys.
+   Edit the values below, commit, and GitHub Pages redeploys.
    ========================================================= */
 window.PD_CONFIG = {
   // WhatsApp number in international format, digits only (no +, spaces or dashes)
