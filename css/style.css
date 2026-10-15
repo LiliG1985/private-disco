@@ -1087,3 +1087,18 @@ html.pd-ready :is(.site-header,main,footer,.wa-float){transition:transform .45s 
 .comp-flow::after{background:linear-gradient(90deg,rgba(10,0,10,.6) 0%,rgba(10,0,10,.35) 35%,transparent 60%),linear-gradient(180deg,rgba(10,0,10,.6) 0%,transparent 14%,transparent 86%,rgba(10,0,10,.6) 100%)}
 @media (max-width:900px){.comp-flow .cf-bg{left:0;-webkit-mask-image:none;mask-image:none;background-position:72% center}.comp-flow::after{background:linear-gradient(180deg,rgba(10,0,10,.35) 0%,rgba(10,0,10,.8) 55%,rgba(10,0,10,.95) 100%)}}
 .talent-flow .cf-bg{background-position:75% 30%}
+.ts-bg{filter:none;transform:none;background-position:center}
+.title-strip > .ts-bg + .ts-inner::before{background:radial-gradient(ellipse 45% 70% at 50% 50%,rgba(10,0,10,.45),transparent 75%)}
+.title-strip{padding:clamp(80px,9vw,130px) 24px}
+@media (max-width:640px){.ts-bg{background-position:72% center;opacity:.7}}
+@media (max-width:640px){.ts-bg{opacity:.5}}
+.plan-flow{min-height:700px}.plan-flow .cf-bg{background-position:center 60%}
+.plan-flow .cf-bg{left:0;background-position:right 60%;-webkit-mask-image:none;mask-image:none}.plan-flow::after{background:linear-gradient(90deg,rgba(10,0,10,.95) 0%,rgba(10,0,10,.8) 28%,rgba(10,0,10,.3) 55%,transparent 75%),linear-gradient(180deg,rgba(10,0,10,.6) 0%,transparent 14%,transparent 86%,rgba(10,0,10,.6) 100%)}@media (max-width:900px){.plan-flow .cf-bg{background-position:82% center}.plan-flow::after{background:linear-gradient(180deg,rgba(10,0,10,.25) 0%,rgba(10,0,10,.8) 55%,rgba(10,0,10,.95) 100%)}}
+/* venues: photo backgrounds */
+.venue{min-height:460px;border-color:rgba(220,220,228,.16);isolation:isolate}
+.venue.yacht{background:url(../assets/photos/venue-yacht.jpg) center/cover no-repeat}
+.venue.villa{background:url(../assets/photos/venue-villa.jpg) center/cover no-repeat}
+.venue::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(10,0,10,.05) 25%,rgba(10,0,10,.55) 60%,rgba(10,0,10,.92) 100%);transition:opacity .5s}
+.venue .big{color:rgba(235,235,242,.14)}
+.venue>p:last-child{color:rgba(237,235,228,.82)}
+@media (max-width:820px){.venue{min-height:380px}}
