@@ -1038,3 +1038,23 @@ html.pd-ready :is(.site-header,main,footer,.wa-float){transition:transform .45s 
   .hw-cta{text-align:left;margin-top:20px}
 }
 .hw-head{max-width:960px}
+
+/* ===== competition terms: photo flowing in from the left ===== */
+.terms-flow{position:relative;overflow:hidden;isolation:isolate;padding:clamp(90px,10vw,140px) 0;min-height:760px;display:flex;align-items:center}
+.tf-img{position:absolute;top:0;bottom:0;left:0;width:min(1250px,80vw);z-index:-2;background-size:cover;background-position:30% center;
+  -webkit-mask:url(../assets/photos/flow-mask.png?v=2) center/100% 100% no-repeat;mask:url(../assets/photos/flow-mask.png?v=2) center/100% 100% no-repeat;transform:scaleX(-1)}
+.terms-flow::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(270deg,rgba(10,0,10,.88) 0%,rgba(10,0,10,.6) 38%,transparent 60%)}
+.terms-flow .wrap{width:100%;display:flex;justify-content:flex-end}
+.terms-flow .terms{max-width:620px}
+@media (max-width:900px){
+  .terms-flow{display:block;min-height:0;padding:0 0 70px}
+  .tf-img{position:relative;width:100%;height:380px;display:block;transform:none;background-position:30% center;
+    -webkit-mask:linear-gradient(180deg,transparent,#000 14%,#000 60%,transparent);mask:linear-gradient(180deg,transparent,#000 14%,#000 60%,transparent)}
+  .terms-flow::after{background:linear-gradient(180deg,transparent 30%,rgba(10,0,10,.5))}
+  .terms-flow .terms{margin-top:-60px;position:relative}
+}
+.tf-img{transform:none;width:min(1150px,72vw);background-position:22% center;
+  -webkit-mask:url(../assets/photos/flow-mask-left.png) center/100% 100% no-repeat;mask:url(../assets/photos/flow-mask-left.png) center/100% 100% no-repeat}
+.terms-flow::after{background:linear-gradient(270deg,rgba(10,0,10,.9) 0%,rgba(10,0,10,.65) 34%,transparent 55%)}
+.terms-flow .terms{max-width:560px}
+@media (max-width:900px){.tf-img{width:100%;-webkit-mask:linear-gradient(180deg,transparent,#000 14%,#000 60%,transparent);mask:linear-gradient(180deg,transparent,#000 14%,#000 60%,transparent)}}
