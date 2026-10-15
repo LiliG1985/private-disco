@@ -1058,3 +1058,10 @@ html.pd-ready :is(.site-header,main,footer,.wa-float){transition:transform .45s 
 .terms-flow::after{background:linear-gradient(270deg,rgba(10,0,10,.9) 0%,rgba(10,0,10,.65) 34%,transparent 55%)}
 .terms-flow .terms{max-width:560px}
 @media (max-width:900px){.tf-img{width:100%;-webkit-mask:linear-gradient(180deg,transparent,#000 14%,#000 60%,transparent);mask:linear-gradient(180deg,transparent,#000 14%,#000 60%,transparent)}}
+.tf-faint{position:absolute;inset:0;z-index:-3;background-size:cover;background-position:center;opacity:.32;filter:saturate(.8);
+  -webkit-mask-image:linear-gradient(180deg,transparent,#000 18%,#000 82%,transparent);mask-image:linear-gradient(180deg,transparent,#000 18%,#000 82%,transparent)}
+.terms-flow::after{background:linear-gradient(270deg,rgba(10,0,10,.72) 0%,rgba(10,0,10,.5) 38%,transparent 60%)}
+@media (max-width:900px){.tf-faint{opacity:.18}}
+.tf-img{width:100%;background-position:left center;-webkit-mask:url(../assets/photos/flow-mask-left.png) left center/72% 100% no-repeat;mask:url(../assets/photos/flow-mask-left.png) left center/72% 100% no-repeat}
+.tf-faint{background-position:left center}
+@media (max-width:900px){.tf-img{background-position:30% center;-webkit-mask:linear-gradient(180deg,transparent,#000 14%,#000 60%,transparent);mask:linear-gradient(180deg,transparent,#000 14%,#000 60%,transparent)}}
