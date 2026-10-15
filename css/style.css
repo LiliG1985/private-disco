@@ -906,3 +906,4 @@ html,body{overflow-x:hidden}
 .ts-inner .eyebrow::after{content:"";display:inline-block;width:40px;height:1px;background:currentColor;opacity:.6;vertical-align:middle;margin-left:16px}
 .ts-inner .eyebrow::after{width:28px;margin-left:14px;opacity:.7;background:linear-gradient(90deg,#e9e9ee,transparent)}
 .ts-bg{filter:saturate(.8) brightness(.75) contrast(1.05)}
+.split-media img.who-img{object-position:74% center}
