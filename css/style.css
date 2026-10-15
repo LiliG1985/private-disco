@@ -982,3 +982,5 @@ html.pd-ready :is(.site-header,main,footer,.wa-float){transition:transform .45s 
   -webkit-mask-image:radial-gradient(ellipse 70% 70% at 40% 55%,#000 25%,transparent 75%);mask-image:radial-gradient(ellipse 70% 70% at 40% 55%,#000 25%,transparent 75%)}
 .detail.has-photo::after{z-index:0}
 @media (max-width:860px){.detail-photo{width:100%;opacity:.28;-webkit-mask-image:radial-gradient(ellipse 80% 60% at 50% 30%,#000 20%,transparent 75%);mask-image:radial-gradient(ellipse 80% 60% at 50% 30%,#000 20%,transparent 75%)}}
+#av .detail-photo{width:100%;opacity:.5;background-size:cover;
+  -webkit-mask-image:radial-gradient(ellipse 60% 85% at 38% 55%,#000 30%,transparent 78%);mask-image:radial-gradient(ellipse 60% 85% at 38% 55%,#000 30%,transparent 78%)}
