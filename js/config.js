@@ -15,12 +15,20 @@ window.PD_CONFIG = {
   // Instagram handle (without the @)
   instagram: "privatedisco",
 
-  // Free form service so competition entries + enquiries land in your inbox.
-  // 1. Go to https://web3forms.com, enter your email, copy the Access Key.
-  // 2. Paste it below. Until you do, forms open WhatsApp with the details filled in.
-  // Alex's Google Sheet web-app link (from setup/ALEX-SETUP.md). Paste it here.
-  // When set, every entry is saved to his sheet and emailed to him.
-  sheetEndpoint: "https://script.google.com/macros/s/AKfycbyjh6y5DvdrHgePF5cTXd3GtJsokpq9HFVwfB1V0K1dJ_yJebDSI5cC3XCIcyrjW_MkEQ/exec",
+  // CONTACT PAGE — Alex's Typeform. Paste the share link from Typeform (Share → copy link),
+  // e.g. "https://form.typeform.com/to/AbC123". Leave empty to show WhatsApp/email options only.
+  typeformContact: "https://6h55baa87se.typeform.com/to/L45jepQe",
 
-  web3formsKey: ""
+  // COMPETITION — Alex's own Google Sheet (Apps Script web-app link, ends in /exec).
+  // Set up with setup/ALEX-SETUP.md on Alex's Google account, then paste the link here.
+  competitionEndpoint: "https://script.google.com/macros/s/AKfycbyb9cuHslOYgeN-wiVwJqjEIPfCWGRVasbzcVxMoSU55U064No78-KsJFer3RuLWA/exec",
+
+  // FORMS — emails go straight to Alex via Web3Forms (free, no account needed).
+  // Alex: go to https://web3forms.com, enter alexs@privatedisco.com, click "Create Access Key",
+  // then paste the key from the email between the quotes below.
+  // Until a key is added, the forms open WhatsApp to Alex with the enquiry filled in.
+  web3formsKey: "",
+
+  // Optional Google Sheet log (leave empty unless it runs on Private Disco's own Google account)
+  sheetEndpoint: ""
 };

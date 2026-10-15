@@ -1152,3 +1152,10 @@ html.pd-ready :is(.site-header,main,footer,.wa-float){transition:transform .45s 
 .yt-sound svg{width:16px;height:16px}
 .yt-sound:hover,.yt-auto.sound-on .yt-sound{background:var(--chrome);color:#140010;border-color:transparent}
 .cards .card span::before{content:"";display:block;width:34px;height:1px;background:linear-gradient(90deg,#f2f2f5,#9d9da6);margin-bottom:14px}
+/* contact: Typeform slot */
+.tf-slot{min-height:200px;border:1px solid rgba(220,220,228,.14);background:rgba(10,0,10,.35);display:flex;align-items:center;justify-content:center}
+.tf-slot [data-tf-live],.tf-slot iframe{width:100%}
+.tf-wait{color:rgba(237,235,228,.65);text-align:center;padding:40px 24px;margin:0;max-width:520px}
+.tf-alt{margin:22px 0 0;font-size:14px;color:rgba(237,235,228,.65)}
+.tf-alt a{color:#f2f2f5;border-bottom:1px solid rgba(242,242,245,.4);cursor:pointer}
+@media (max-width:640px){.tf-slot [data-tf-live]{height:560px!important}}

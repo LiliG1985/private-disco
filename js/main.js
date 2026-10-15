@@ -173,6 +173,24 @@
     } else load();
   });
 
+
+  /* ---------- Typeform embed (Contact page): loads only when scrolled near ---------- */
+  document.querySelectorAll("[data-tf-slot]").forEach((slot) => {
+    const url = (C.typeformContact || "").trim();
+    const m = url.match(/\/to\/([A-Za-z0-9]+)/);
+    if (!m) { slot.innerHTML = '<p class="tf-wait">Message Alex directly on WhatsApp or email below and we\'ll come back with ideas and a proposal.</p>'; return; }
+    const go = () => {
+      slot.innerHTML = '<div data-tf-live="' + m[1] + '" data-tf-transitive-search-params data-tf-medium="privatedisco-site" style="width:100%;height:620px"></div>';
+      if (!document.querySelector('script[src*="embed.typeform.com"]')) {
+        const sc = document.createElement("script"); sc.src = "https://embed.typeform.com/next/embed.js"; sc.async = true; document.body.appendChild(sc);
+      } else if (window.tf && window.tf.load) window.tf.load();
+    };
+    if ("IntersectionObserver" in window) {
+      const io2 = new IntersectionObserver((es) => { if (es.some((e) => e.isIntersecting)) { io2.disconnect(); go(); } }, { rootMargin: "400px 0px" });
+      io2.observe(slot);
+    } else go();
+  });
+
   /* ---------- fill any [data-wa] / [data-mail] / [data-ig] links on the page ---------- */
   document.querySelectorAll("[data-wa]").forEach((a) => { a.href = waLink(a.dataset.wa); a.target = "_blank"; a.rel = "noopener"; });
   document.querySelectorAll("[data-mail]").forEach((a) => { a.href = mailLink(a.dataset.mail); });
@@ -265,9 +283,10 @@
      Without one: opens WhatsApp with the entry typed out, ready to send. */
   window.PD.send = async function (subject, fields, type) {
     const lines = Object.entries(fields).filter(([, v]) => v).map(([k, v]) => k + ": " + v);
-    if (C.sheetEndpoint) {
+    const endpoint = type === "competition" ? (C.competitionEndpoint || C.sheetEndpoint) : C.sheetEndpoint;
+    if (endpoint) {
       // text/plain avoids a CORS preflight, which Google Apps Script doesn't answer
-      const res = await fetch(C.sheetEndpoint, {
+      const res = await fetch(endpoint, {
         method: "POST",
         headers: { "Content-Type": "text/plain;charset=utf-8" },
         body: JSON.stringify(Object.assign({ _type: type || "enquiry" }, fields))
@@ -280,7 +299,7 @@
       const res = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify(Object.assign({ access_key: C.web3formsKey, subject, from_name: "Private Disco website" }, fields))
+        body: JSON.stringify(Object.assign({ access_key: C.web3formsKey, subject, from_name: "Private Disco website", replyto: fields.Email || undefined, botcheck: false }, fields))
       });
       const data = await res.json().catch(() => ({}));
       if (!res.ok || data.success === false) throw new Error(data.message || "Send failed");
