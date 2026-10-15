@@ -968,3 +968,4 @@ html,body{overflow-x:hidden}
 @media (max-width:900px){.comp-flow .wf-img{width:100%;background-size:cover;background-position:center 30%}}
 .comp-flow .wf-img{background-size:cover;background-position:right 30%}
 @media (max-width:900px){.comp-flow .wf-img{background-image:url(../assets/photos/boombox-plum.jpg)!important;background-position:center 30%}}
+.comp-flow .wf-blur{opacity:.35;background-position:right center;background-size:60% auto;background-repeat:no-repeat;filter:blur(60px) brightness(.35)}
