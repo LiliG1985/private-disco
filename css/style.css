@@ -957,3 +957,5 @@ html,body{overflow-x:hidden}
 .who-flow::after{background:linear-gradient(90deg,rgba(10,0,10,.85) 0%,rgba(10,0,10,.55) 35%,transparent 58%)}
 .wf-text>p:not(.eyebrow)+p{margin-top:16px}
 @media (max-width:900px){.who-flow::after{background:linear-gradient(180deg,transparent 30%,rgba(10,0,10,.5))}}
+.band-bg.band-boombox{background-position:center 28%;opacity:1}
+.band-bg.band-boombox{background-position:center 40%}
