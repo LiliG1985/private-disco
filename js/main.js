@@ -142,6 +142,17 @@
     layout(); restart();
   });
 
+
+  /* ---------- lazy YouTube: load the player only when tapped ---------- */
+  document.querySelectorAll(".yt-lite").forEach((b) => b.addEventListener("click", () => {
+    const f = document.createElement("iframe");
+    f.src = "https://www.youtube-nocookie.com/embed/" + b.dataset.yt + "?autoplay=1&playsinline=1&rel=0&modestbranding=1";
+    f.title = b.getAttribute("aria-label") || "Video";
+    f.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+    f.allowFullscreen = true;
+    b.replaceWith(f);
+  }, { once: true }));
+
   /* ---------- fill any [data-wa] / [data-mail] / [data-ig] links on the page ---------- */
   document.querySelectorAll("[data-wa]").forEach((a) => { a.href = waLink(a.dataset.wa); a.target = "_blank"; a.rel = "noopener"; });
   document.querySelectorAll("[data-mail]").forEach((a) => { a.href = mailLink(a.dataset.mail); });
