@@ -2,10 +2,12 @@
 (function () {
   const MONTHS = ["January","February","March","April","May","June","July","August","September","October","November","December"];
   const DOW = ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
-  const MAX_MONTHS_AHEAD = 18;
+  const MAX_MONTHS_AHEAD = 11;   // January to December 2027 only
 
   const today = new Date(); today.setHours(0, 0, 0, 0);
-  let view = new Date(today.getFullYear(), today.getMonth(), 1);
+  const FIRST_DATE = new Date(2027, 0, 1);                 // party dates open from 1 January 2027
+  const earliest = today > FIRST_DATE ? today : FIRST_DATE;
+  let view = new Date(earliest.getFullYear(), earliest.getMonth(), 1);
   let selected = null;
 
   const grid = document.getElementById("cal-grid");
@@ -17,7 +19,7 @@
 
   const fmt = (d) => d.toLocaleDateString("en-GB", { weekday: "long", day: "numeric", month: "long", year: "numeric" });
   const iso = (d) => d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
-  const monthsFromNow = (d) => (d.getFullYear() - today.getFullYear()) * 12 + d.getMonth() - today.getMonth();
+  const monthsFromNow = (d) => (d.getFullYear() - earliest.getFullYear()) * 12 + d.getMonth() - earliest.getMonth();
 
   function render() {
     title.textContent = MONTHS[view.getMonth()] + " " + view.getFullYear();
@@ -33,7 +35,8 @@
       if (d.getTime() === today.getTime()) cls.push("today");
       if (d.getDay() === 5 || d.getDay() === 6) cls.push("wknd"); // Fri & Sat nights
       if (selected && d.getTime() === selected.getTime()) cls.push("sel");
-      const past = d < today;
+      const LAST_DATE = new Date(2027, 11, 31);
+      const past = d < earliest || d > LAST_DATE;
       html += '<button type="button" class="' + cls.join(" ") + '" data-d="' + iso(d) + '"' + (past ? " disabled" : "") +
         ' aria-label="' + fmt(d) + '"' + (selected && d.getTime() === selected.getTime() ? ' aria-pressed="true"' : "") + ">" + day + "</button>";
     }

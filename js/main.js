@@ -185,10 +185,14 @@
         const sc = document.createElement("script"); sc.src = "https://embed.typeform.com/next/embed.js"; sc.async = true; document.body.appendChild(sc);
       } else if (window.tf && window.tf.load) window.tf.load();
     };
+    let done = false; const once = () => { if (!done) { done = true; go(); } };
     if ("IntersectionObserver" in window) {
-      const io2 = new IntersectionObserver((es) => { if (es.some((e) => e.isIntersecting)) { io2.disconnect(); go(); } }, { rootMargin: "400px 0px" });
+      const io2 = new IntersectionObserver((es) => { if (es.some((e) => e.isIntersecting)) { io2.disconnect(); once(); } }, { rootMargin: "400px 0px" });
       io2.observe(slot);
-    } else go();
+    }
+    // fallback: always load shortly after the page has finished loading
+    const later = () => setTimeout(once, 1200);
+    if (document.readyState === "complete") later(); else window.addEventListener("load", later);
   });
 
   /* ---------- fill any [data-wa] / [data-mail] / [data-ig] links on the page ---------- */
