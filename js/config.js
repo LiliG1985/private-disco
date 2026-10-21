@@ -21,7 +21,7 @@ window.PD_CONFIG = {
 
   // COMPETITION — Alex's own Google Sheet (Apps Script web-app link, ends in /exec).
   // Set up with setup/ALEX-SETUP.md on Alex's Google account, then paste the link here.
-  competitionEndpoint: "https://script.google.com/macros/s/AKfycbyqyhprLnT_WOJ-Rh3gPGXXN6qKhcIIdcCJcZf0bR4AXqVtBep3oQ9faSaLhWB7ZOU/exec",
+  competitionEndpoint: "https://script.google.com/macros/s/AKfycbzzsMf-ZbOYf1OoErJafxH_AZVDBiiHDR75vCelw9p_pfr_GUn0Sw2IF1nsnIjRtlmw8A/exec",
 
   // FORMS — emails go straight to Alex via Web3Forms (free, no account needed).
   // Alex: go to https://web3forms.com, enter alex@privatedisco.com, click "Create Access Key",
