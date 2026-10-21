@@ -1159,3 +1159,11 @@ html.pd-ready :is(.site-header,main,footer,.wa-float){transition:transform .45s 
 .tf-alt{margin:22px 0 0;font-size:14px;color:rgba(237,235,228,.65)}
 .tf-alt a{color:#f2f2f5;border-bottom:1px solid rgba(242,242,245,.4);cursor:pointer}
 @media (max-width:640px){.tf-slot [data-tf-widget]{height:560px!important}}
+
+/* mobile menu: always cover the full screen, even when scrolled */
+@media (max-width:900px){
+  body.menu-open{overflow:hidden}
+  .menu-open .site-header{backdrop-filter:none!important;-webkit-backdrop-filter:none!important;transform:none!important;background:transparent!important;border-color:transparent!important}
+  .nav-links{inset:0;width:100vw;height:100vh;height:100dvh;z-index:55;background:#0a000a}
+  .menu-open .brand{position:relative;z-index:60}
+}

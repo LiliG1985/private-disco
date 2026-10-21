@@ -68,10 +68,15 @@
     e.preventDefault();
     let firstBad = null;
     form.querySelectorAll("[required]").forEach((el) => {
-      const bad = el.type === "checkbox" ? !el.checked : !el.value.trim() || (el.type === "email" && !/^\S+@\S+\.\S+$/.test(el.value));
+      const val = el.value.trim();
+      const bad = el.type === "checkbox" ? !el.checked
+        : !val
+        || (el.type === "email" && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(val))
+        || (el.type === "tel" && (val.replace(/\D/g, "").length < 8 || /[^\d\s+()\-]/.test(val)));
       el.classList.toggle("invalid", bad);
       if (bad && !firstBad) firstBad = el;
     });
+    const phoneEl = document.getElementById("phone"), emailEl = document.getElementById("email");
     if (!selected) {
       cal.classList.add("cal-error");
       show("Please choose your requested date on the calendar.", false);
@@ -79,7 +84,9 @@
       return;
     }
     if (firstBad) {
-      show("Please fill in the highlighted fields.", false);
+      show(firstBad === phoneEl ? "Please enter a valid phone / WhatsApp number (including country code, e.g. +971 50 123 4567)."
+        : firstBad === emailEl ? "Please enter a valid email address so we can contact you if you win."
+        : "Please fill in the highlighted fields.", false);
       firstBad.focus();
       return;
     }
