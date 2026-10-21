@@ -10,7 +10,7 @@ window.PD_CONFIG = {
   contactName: "Alex Simmons",
 
   // Email address shown on the site and used for mailto links
-  email: "alexs@privatedisco.com",
+  email: "alex@privatedisco.com",
 
   // Instagram handle (without the @)
   instagram: "privatedisco",
@@ -24,7 +24,7 @@ window.PD_CONFIG = {
   competitionEndpoint: "https://script.google.com/macros/s/AKfycbyb9cuHslOYgeN-wiVwJqjEIPfCWGRVasbzcVxMoSU55U064No78-KsJFer3RuLWA/exec",
 
   // FORMS — emails go straight to Alex via Web3Forms (free, no account needed).
-  // Alex: go to https://web3forms.com, enter alexs@privatedisco.com, click "Create Access Key",
+  // Alex: go to https://web3forms.com, enter alex@privatedisco.com, click "Create Access Key",
   // then paste the key from the email between the quotes below.
   // Until a key is added, the forms open WhatsApp to Alex with the enquiry filled in.
   web3formsKey: "",
