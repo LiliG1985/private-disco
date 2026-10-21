@@ -44,8 +44,8 @@
     const footImg = "assets/banners/ball-glass.jpg";
     footer.outerHTML =
       '<footer><div class="foot-bg" style="background-image:url(' + footImg + ')"></div><div class="wrap">' +
-      '<div class="foot-cta"><p class="eyebrow">Let\'s connect</p><h2>Let\'s bring your vision <span class="metal">to life.</span></h2>' +
-      '<a class="btn btn-metal" href="' + waLink("Hi Private Disco, I'd like to enquire about an event.") + '" target="_blank" rel="noopener">' + ICONS.wa + 'Start the conversation</a></div>' +
+      (/contact/.test(location.pathname) ? '' : '<div class="foot-cta"><p class="eyebrow">Let\'s connect</p><h2>Let\'s bring your vision <span class="metal">to life.</span></h2>' +
+      '<a class="btn btn-metal" href="' + waLink("Hi Private Disco, I'd like to enquire about an event.") + '" target="_blank" rel="noopener">' + ICONS.wa + 'Start the conversation</a></div>') +
       '<div class="foot">' +
       '<div><img src="assets/logo.png?v=20261002095315" alt="Private Disco" width="279" height="292"><p>Talent-first event and entertainment experiences across the UAE.</p></div>' +
       '<div><h4>Explore</h4><ul>' + links.map(([h, t]) => '<li><a href="' + h + '">' + t + "</a></li>").join("") + "</ul></div>" +
